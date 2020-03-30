@@ -7,17 +7,15 @@ import '@vkontakte/vkui/dist/vkui.css';
 
 import {Epic, Tabbar, TabbarItem, Panel, PanelHeader} from "@vkontakte/vkui";
 import Icon28NewsfeedOutline from '@vkontakte/icons/dist/28/newsfeed_outline';
-import Icon28SearchOutline from '@vkontakte/icons/dist/28/search_outline';
-import Icon28MessageOutline from '@vkontakte/icons/dist/28/message_outline';
-import Icon28Notifications from '@vkontakte/icons/dist/28/notifications';
-import Icon28More from '@vkontakte/icons/dist/28/more';
+import Icon28PlaceOutline from '@vkontakte/icons/dist/28/place_outline';
+import Icon28Profile from '@vkontakte/icons/dist/28/profile';
 
 class App extends React.Component {
     constructor (props) {
         super(props);
 
         this.state = {
-            activeStory: 'more'
+            activeStory: 'map'
         };
         this.onStoryChange = this.onStoryChange.bind(this);
     }
@@ -39,29 +37,17 @@ class App extends React.Component {
                     ><Icon28NewsfeedOutline /></TabbarItem>
                     <TabbarItem
                         onClick={this.onStoryChange}
-                        selected={this.state.activeStory === 'discover'}
-                        data-story="discover"
-                        text="Поиск"
-                    ><Icon28SearchOutline /></TabbarItem>
+                        selected={this.state.activeStory === 'map'}
+                        data-story="map"
+                        label="3"
+                        text="Карта"
+                    ><Icon28PlaceOutline /></TabbarItem>
                     <TabbarItem
                         onClick={this.onStoryChange}
-                        selected={this.state.activeStory === 'messages'}
-                        data-story="messages"
-                        label="12"
-                        text="Сообщения"
-                    ><Icon28MessageOutline /></TabbarItem>
-                    <TabbarItem
-                        onClick={this.onStoryChange}
-                        selected={this.state.activeStory === 'notifications'}
-                        data-story="notifications"
-                        text="Уведомлен."
-                    ><Icon28Notifications /></TabbarItem>
-                    <TabbarItem
-                        onClick={this.onStoryChange}
-                        selected={this.state.activeStory === 'more'}
-                        data-story="more"
-                        text="Ещё"
-                    ><Icon28More /></TabbarItem>
+                        selected={this.state.activeStory === 'profile'}
+                        data-story="profile"
+                        text="Профиль"
+                    ><Icon28Profile /></TabbarItem>
                 </Tabbar>
             }>
                 <View id="feed" activePanel="feed">
@@ -69,24 +55,14 @@ class App extends React.Component {
                         <PanelHeader>Новости</PanelHeader>
                     </Panel>
                 </View>
-                <View id="discover" activePanel="discover">
-                    <Panel id="discover">
-                        <PanelHeader>Поиск</PanelHeader>
+                <View id="map" activePanel="map">
+                    <Panel id="map">
+                        <PanelHeader>Карта</PanelHeader>
                     </Panel>
                 </View>
-                <View id="messages" activePanel="messages">
-                    <Panel id="messages">
-                        <PanelHeader>Сообщения</PanelHeader>
-                    </Panel>
-                </View>
-                <View id="notifications" activePanel="notifications">
-                    <Panel id="notifications">
-                        <PanelHeader>Уведомления</PanelHeader>
-                    </Panel>
-                </View>
-                <View id="more" activePanel="more">
-                    <Panel id="more">
-                        <PanelHeader>Ещё</PanelHeader>
+                <View id="profile" activePanel="profile">
+                    <Panel id="profile">
+                        <PanelHeader>Профиль</PanelHeader>
                     </Panel>
                 </View>
             </Epic>
