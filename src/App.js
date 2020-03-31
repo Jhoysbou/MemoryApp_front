@@ -1,30 +1,47 @@
 import React, {useState, useEffect} from 'react';
-import bridge from '@vkontakte/vk-bridge';
 import View from '@vkontakte/vkui/dist/components/View/View';
-import ScreenSpinner from '@vkontakte/vkui/dist/components/ScreenSpinner/ScreenSpinner';
 import '@vkontakte/vkui/dist/vkui.css';
+import bridge from '@vkontakte/vk-bridge';
 
 
-import {Epic, Tabbar, TabbarItem, Panel, PanelHeader} from "@vkontakte/vkui";
+import {Epic, Tabbar, TabbarItem, Panel, PanelHeader, Header, Separator, Link, Counter} from "@vkontakte/vkui";
 import Icon28NewsfeedOutline from '@vkontakte/icons/dist/28/newsfeed_outline';
 import Icon28PlaceOutline from '@vkontakte/icons/dist/28/place_outline';
 import Icon28Profile from '@vkontakte/icons/dist/28/profile';
 
+import Icon28PrivacyOutline from '@vkontakte/icons/dist/28/privacy_outline';
+import Profile from "./panels/Profile/Profile";
+
 class App extends React.Component {
-    constructor (props) {
+    constructor(props) {
         super(props);
 
         this.state = {
             activeStory: 'map'
         };
         this.onStoryChange = this.onStoryChange.bind(this);
+        // Sends event to client
+        bridge.send('VKWebAppGetUserInfo')
+            .then(data => {
+                console.log(data)
+                this.setState({
+                    user : data
+                });
+            })
+            .catch(error => {
+                console.log(error);
+            })
+
+
+        // Subscribes to event, sended by client
+        bridge.subscribe(e => console.log(e));
     }
 
-    onStoryChange (e) {
-        this.setState({ activeStory: e.currentTarget.dataset.story })
+    onStoryChange(e) {
+        this.setState({activeStory: e.currentTarget.dataset.story})
     }
 
-    render () {
+    render() {
 
         return (
             <Epic activeStory={this.state.activeStory} tabbar={
@@ -34,20 +51,20 @@ class App extends React.Component {
                         selected={this.state.activeStory === 'feed'}
                         data-story="feed"
                         text="Новости"
-                    ><Icon28NewsfeedOutline /></TabbarItem>
+                    ><Icon28NewsfeedOutline/></TabbarItem>
                     <TabbarItem
                         onClick={this.onStoryChange}
                         selected={this.state.activeStory === 'map'}
                         data-story="map"
                         label="3"
                         text="Карта"
-                    ><Icon28PlaceOutline /></TabbarItem>
+                    ><Icon28PlaceOutline/></TabbarItem>
                     <TabbarItem
                         onClick={this.onStoryChange}
                         selected={this.state.activeStory === 'profile'}
                         data-story="profile"
                         text="Профиль"
-                    ><Icon28Profile /></TabbarItem>
+                    ><Icon28Profile/></TabbarItem>
                 </Tabbar>
             }>
                 <View id="feed" activePanel="feed">
@@ -60,11 +77,8 @@ class App extends React.Component {
                         <PanelHeader>Карта</PanelHeader>
                     </Panel>
                 </View>
-                <View id="profile" activePanel="profile">
-                    <Panel id="profile">
-                        <PanelHeader>Профиль</PanelHeader>
-                    </Panel>
-                </View>
+                <Profile id="profile" activePanel="profile" user={this.state.user}>
+                </Profile>
             </Epic>
         )
     }

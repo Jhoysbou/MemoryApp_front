@@ -1,0 +1,19 @@
+.userImage {
+    display: grid;
+    grid-template-areas: "name counter";
+    grid-template-columns: 95fr 5fr;
+    grid-gap: 5px;
+
+}
+
+.userImage p {
+    font-size: small;
+}
+
+.name {
+    grid-area: name;
+}
+
+.level_counter {
+    grid-area: counter;
+}
