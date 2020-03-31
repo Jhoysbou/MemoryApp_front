@@ -13,7 +13,8 @@ class Profile extends React.Component {
 
         this.state = {
             user: props.user,
-            progress: 95
+            progress: 67,
+            level: 5
         };
         //    TODO: load user's progress
     }
@@ -28,24 +29,26 @@ class Profile extends React.Component {
                     <Group>
                         <Group header={<Header mode="secondary">Placeholder</Header>}>
                             <Cell
-                                className={classes.userImage}
                                 size="l"
                                 before={<Avatar src={this.state.user.photo_100} size={80}/>}
                                 multiline
                             >
-                                <div className={classes.name}>
-                                    {`${this.state.user.first_name}  ${this.state.user.last_name}`}
+                                <div className={classes.userImage}>
+                                    <div className={classes.name}>
+                                        {`${this.state.user.first_name}  ${this.state.user.last_name}`}
+                                    </div>
+                                    <div className={classes.level_counter}>
+                                        <Counter size="m" mode="primary">{this.state.level}</Counter>
+                                    </div>
+                                    {/*{`${this.state.user.city.id === 0 ? '' : this.state.user.city.title}`}*/}
+                                    <InfoRow className={classes.progressBar} header="Ваш уровень">
+                                        <Progress value={this.state.progress}/>
+                                        <p>
+                                            Загружайте больше фотографий и информации о героях войны, чтобы повысить ваш
+                                            уровень
+                                        </p>
+                                    </InfoRow>
                                 </div>
-                                <div className={classes.level_counter}>
-                                    <Counter size="s" mode="primary">5</Counter>
-                                </div>
-                                {/*{`${this.state.user.city.id === 0 ? '' : this.state.user.city.title}`}*/}
-
-                                <InfoRow header="Ваш уровень">
-                                    <Progress value={this.state.progress}/>
-                                </InfoRow>
-                                <p>Загружайте больше фотографий и информации о героях войны, чтобы повысить ваш
-                                    уровень</p>
                             </Cell>
 
                         </Group>
