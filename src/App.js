@@ -8,16 +8,15 @@ import {Epic, Tabbar, TabbarItem, Panel, PanelHeader, Header, Separator, Link, C
 import Icon28NewsfeedOutline from '@vkontakte/icons/dist/28/newsfeed_outline';
 import Icon28PlaceOutline from '@vkontakte/icons/dist/28/place_outline';
 import Icon28Profile from '@vkontakte/icons/dist/28/profile';
-
-import Icon28PrivacyOutline from '@vkontakte/icons/dist/28/privacy_outline';
-import Profile from "./panels/Profile/Profile";
+import Icon28PictureStackOutline from '@vkontakte/icons/dist/28/picture_stack_outline';
+import Profile from "./panels/Profile/Profile.js";
 
 class App extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            activeStory: 'map'
+            activeStory: 'photoLoader'
         };
         this.onStoryChange = this.onStoryChange.bind(this);
         // Sends event to client
@@ -61,6 +60,12 @@ class App extends React.Component {
                     ><Icon28PlaceOutline/></TabbarItem>
                     <TabbarItem
                         onClick={this.onStoryChange}
+                        selected={this.state.activeStory === 'photoLoader'}
+                        data-story="photoLoader"
+                        text="Загрузить"
+                    ><Icon28PictureStackOutline/></TabbarItem>
+                    <TabbarItem
+                        onClick={this.onStoryChange}
                         selected={this.state.activeStory === 'profile'}
                         data-story="profile"
                         text="Профиль"
@@ -75,6 +80,11 @@ class App extends React.Component {
                 <View id="map" activePanel="map">
                     <Panel id="map">
                         <PanelHeader>Карта</PanelHeader>
+                    </Panel>
+                </View>
+                <View id="photoLoader" activePanel="photoLoader">
+                    <Panel id="photoLoader">
+                        <PanelHeader>Загрузить</PanelHeader>
                     </Panel>
                 </View>
                 <Profile id="profile" activePanel="profile" user={this.state.user}>
