@@ -62,7 +62,6 @@ class Profile extends React.Component {
                             <Cell>
                                 <InfoRow header="Достижения">
                                     <CardScroll>
-                                        {/*TODO make medals*/}
                                         <Medal medalType={Medals.photo_10} />
                                         <Medal medalType={Medals.photo_20} />
                                         <Medal medalType={Medals.story_5} />
@@ -72,6 +71,7 @@ class Profile extends React.Component {
                             </Cell>
                             <Cell>
                                 <CardGrid>
+                                    {/*TODO make achievements*/}
                                     <Card className={classes.card} size="l" mode="shadow">
                                         <div style={{height: 96}}>
                                             50 фото

@@ -9,6 +9,8 @@ import Icon28NewsfeedOutline from '@vkontakte/icons/dist/28/newsfeed_outline';
 import Icon28PlaceOutline from '@vkontakte/icons/dist/28/place_outline';
 import Icon28Profile from '@vkontakte/icons/dist/28/profile';
 import Icon28PictureStackOutline from '@vkontakte/icons/dist/28/picture_stack_outline';
+
+import LoadImage from "./panels/LoadImage/LoadImage.js";
 import Profile from "./panels/Profile/Profile.js";
 
 class App extends React.Component {
@@ -22,9 +24,8 @@ class App extends React.Component {
         // Sends event to client
         bridge.send('VKWebAppGetUserInfo')
             .then(data => {
-                console.log(data)
                 this.setState({
-                    user : data
+                    user: data
                 });
             })
             .catch(error => {
@@ -82,11 +83,8 @@ class App extends React.Component {
                         <PanelHeader>Карта</PanelHeader>
                     </Panel>
                 </View>
-                <View id="photoLoader" activePanel="photoLoader">
-                    <Panel id="photoLoader">
-                        <PanelHeader>Загрузить</PanelHeader>
-                    </Panel>
-                </View>
+                <LoadImage id="photoLoader" activePanel="photoLoader"/>
+
                 <Profile id="profile" activePanel="profile" user={this.state.user}>
                 </Profile>
             </Epic>
