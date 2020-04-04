@@ -78,11 +78,9 @@ class App extends React.Component {
                         <PanelHeader>Новости</PanelHeader>
                     </Panel>
                 </View>
-                <View id="map" activePanel="map">
-                    <Panel id="map">
-                        <PanelHeader>Карта</PanelHeader>
-                    </Panel>
-                </View>
+                
+				<Map id="map" activePanel="map"/>
+				
                 <LoadImage id="photoLoader" activePanel="photoLoader"/>
 
                 <Profile id="profile" activePanel="profile" user={this.state.user}>
