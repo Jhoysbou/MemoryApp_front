@@ -1,18 +1,30 @@
 .elementWrapper {
     display: grid;
     grid-template-columns: 100px 1fr;
-    grid-template-rows: 150px;
+    grid-template-rows: 150px 5px;
+    grid-template-areas: "img txt" "sep sep";
     grid-gap: 10px;
     margin: 10px;
 }
 
+.separator {
+    grid-area: sep;
+}
+
 .image {
+    grid-area: img;
     border-radius: 8px;
     width: 100%;
 }
 
 .elementWrapper {
     text-align: left;
+}
+
+.elementWrapper p {
+    grid-area: txt;
+    font-family: Tahoma sans-serif;
+    color: black;
 }
 
 .tip {

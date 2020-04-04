@@ -2,10 +2,10 @@ import React from "react";
 import vkBridge from '@vkontakte/vk-bridge';
 import {View, Panel, PanelHeader, CellButton, ConfigProvider, PanelHeaderBack, Group} from "@vkontakte/vkui";
 
-import AddNewImageCompanent from './addNewImage.companent'
+import AddNewHeroComponent from './addNewHero.component'
 import classes from './LoadImage.module.css';
-import ExtendedView from "./ExtendedView.companent";
-import ListElement from "./ListElement.companent.js";
+import ExtendedView from "./ExtendedView.component";
+import ListElement from "./ListElement.component.js";
 
 
 class LoadImage extends React.Component {
@@ -16,8 +16,6 @@ class LoadImage extends React.Component {
             hero: {},
             activePanel: "feed",
             history: ['feed'],
-            name_onExtendedView: 'non',
-            hero_id: 'non'
         };
 
     }
@@ -67,11 +65,11 @@ class LoadImage extends React.Component {
                             img="https://roadheroes.storage.yandexcloud.net/de3758ec9b1b4d6c2406674298923af7_origin.jpg"
                             name="Тюкалов Поликарп Дорофеевич"
                             rank="ст. лейтенант"
-                            date="год рождения: 08.03.1922"
+                            date="08.03.1922 – 5.6.1985"
                         />
                     </CellButton>
                     {/*<ExtendedView id={this.props.id}/>*/}
-                    <AddNewImageCompanent/>
+                    <AddNewHeroComponent />
                 </Panel>
                 <Panel id="extended">
                     <PanelHeader left={<PanelHeaderBack onClick={() => this.setState({activePanel: 'feed'})}/>}>

@@ -1,5 +1,6 @@
 import React from "react";
 import classes from "./ListElement.module.css";
+import { Separator } from "@vkontakte/vkui";
 
 class ListElement extends React.Component {
     constructor(props) {
@@ -30,6 +31,7 @@ class ListElement extends React.Component {
                         Нажмите, чтобы увидеть подробную информацию
                     </span>
                 </p>
+                <Separator className={classes.separator} />
             </div>
         )
     }

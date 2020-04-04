@@ -1,9 +1,9 @@
 import React from "react";
 import classes from './LoadImage.module.css'
-import { Div, Separator } from "@vkontakte/vkui";
+import { Separator } from "@vkontakte/vkui";
 
 
-class AddNewImageCompanent extends React.Component {
+class AddNewHeroComponent extends React.Component {
     constructor(props) {
         super(props);
     }
@@ -13,10 +13,9 @@ class AddNewImageCompanent extends React.Component {
             <div className={classes.add_new}>
                 content
                 <Separator className={classes.separator} />
-
             </div>
         )
     }
 }
 
-export default AddNewImageCompanent;
+export default AddNewHeroComponent;

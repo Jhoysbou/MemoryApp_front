@@ -27,6 +27,7 @@ class NewsElement extends React.Component {
                         "За боевые заслуги"
                     </span>
                 </div>
+                <Separator className={classes.separator} />
             </div>
 
         )
