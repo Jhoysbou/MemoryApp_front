@@ -2,10 +2,11 @@ import React from "react";
 import vkBridge from '@vkontakte/vk-bridge';
 import {View, Panel, PanelHeader, CellButton, PanelHeaderBack, ScreenSpinner} from "@vkontakte/vkui";
 
-import AddNewHeroComponent from './addNewHero.component'
+import AddNewHeroButtonComponent from './addNewHeroButton.component'
 import classes from './LoadImage.module.css';
 import ExtendedView from "./ExtendedView.component";
 import ListElement from "./ListElement.component.js";
+import NewHero from './NewHero.component';
 
 
 class LoadImage extends React.Component {
@@ -16,15 +17,15 @@ class LoadImage extends React.Component {
             id: 1,
             activePanel: "feed",
             history: ['feed'],
-            loadingState: true
+            isLoading: true
         };
-        console.log(this.state.user_id)
+
         fetch('https://a830c179.ngrok.io/api/v1/user/get_heroes/' + this.state.user_id)
             .then(response => {
                 return response.json()
             })
             .then(data => {
-                this.setState({heroes: data, loadingState: false})
+                this.setState({heroes: data, isLoading: false})
             })
     }
 
@@ -58,6 +59,7 @@ class LoadImage extends React.Component {
     }
 
 
+
     onSelectFile = e => {
         if (e.target.files && e.target.files.length > 0) {
             const reader = new FileReader();
@@ -69,7 +71,7 @@ class LoadImage extends React.Component {
     };
 
 
-    render(callbackfn, thisArg) {
+    render() {
         return (
             <View
                 activePanel={this.state.activePanel}
@@ -82,21 +84,33 @@ class LoadImage extends React.Component {
                         Моя история
                     </PanelHeader>
                     {
-                        this.state.loadingState ?
+                        this.state.isLoading ?
                             <ScreenSpinner/> :
                                 this.renderHeroes(this.state.heroes)
                     }
 
-                    <AddNewHeroComponent/>
+                    <AddNewHeroButtonComponent
+                        onClick={() => !this.state.isLoading ? this.setState({activePanel: 'new_hero'}): "do nothing"}/>
                 </Panel>
                 <Panel id="extended">
-                    <PanelHeader left={<PanelHeaderBack onClick={() => this.setState({activePanel: 'feed'})}/>}>
+                    <PanelHeader
+                        left={<PanelHeaderBack
+                            onClick={() => !this.state.isLoading ? this.setState({activePanel: 'feed'}): "do nothing"}/>}>
                         {this.state.name_onExtendedView}
                     </PanelHeader>
                     <ExtendedView
                         hero_name={this.state.name_onExtendedView}
-                        heroes = {this.state.heroes}/>
+                        heroes = {this.state.heroes} />
                 </Panel>
+                <Panel id="new_hero">
+                    <PanelHeader
+                        left={<PanelHeaderBack
+                            onClick={() => !this.state.isLoading ? this.setState({activePanel: 'feed'}): "do nothing"}/>}>
+                        Создать профиль
+                    </PanelHeader>
+                    <NewHero />
+                </Panel>
+
 
                 {/*<FormLayout>*/}
                 {/*    <File top="Загрузите ваше фото" before={<Icon24Camera />} size="xl" accept="image/*" onChange={this.onSelectFile}>*/}

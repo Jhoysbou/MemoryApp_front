@@ -1,17 +1,21 @@
 import React from "react";
 import classes from './LoadImage.module.css'
-import {CellButton} from "@vkontakte/vkui";
+import { CellButton } from "@vkontakte/vkui";
 
 
-class AddNewHeroComponent extends React.Component {
+class AddNewHeroButtonComponent extends React.Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            onClick: props.onClick,
+        }
     }
 
     render() {
         return (
             <div className={classes.add_new}>
-                <CellButton onClick={() => {}}
+                <CellButton onClick={this.state.onClick}
                             className={classes.btn}
                             size="l"
                             mode="secondary">
@@ -24,4 +28,4 @@ class AddNewHeroComponent extends React.Component {
     }
 }
 
-export default AddNewHeroComponent;
+export default AddNewHeroButtonComponent;
