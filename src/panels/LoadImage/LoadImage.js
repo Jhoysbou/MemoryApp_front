@@ -12,13 +12,14 @@ class LoadImage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            user_id: props.user,
             id: 1,
             activePanel: "feed",
             history: ['feed'],
             loadingState: true
         };
 
-        fetch('https://a830c179.ngrok.io/api/v1/hero/getlist/')
+        fetch('https://a830c179.ngrok.io/api/v1/user/get_heroes/' + this.state.user_id)
             .then(response => {
                 return response.json()
             })
@@ -84,8 +85,6 @@ class LoadImage extends React.Component {
                         this.state.loadingState ?
                             <ScreenSpinner/> :
                                 this.renderHeroes(this.state.heroes)
-
-
                     }
 
                     <AddNewHeroComponent/>
@@ -94,7 +93,9 @@ class LoadImage extends React.Component {
                     <PanelHeader left={<PanelHeaderBack onClick={() => this.setState({activePanel: 'feed'})}/>}>
                         {this.state.name_onExtendedView}
                     </PanelHeader>
-                    <ExtendedView hero_id={this.state.hero_id}/>
+                    <ExtendedView
+                        hero_name={this.state.name_onExtendedView}
+                        heroes = {this.state.heroes}/>
                 </Panel>
 
                 {/*<FormLayout>*/}

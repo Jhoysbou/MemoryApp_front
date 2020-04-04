@@ -82,7 +82,7 @@ class App extends React.Component {
                 
 				<Map id="map" activePanel="map"/>
 				
-                <LoadImage id="photoLoader" activePanel="photoLoader"/>
+                <LoadImage id="photoLoader" activePanel="photoLoader" user={this.state.user}/>
 
                 <Profile id="profile" activePanel="profile" user={this.state.user}>
                 </Profile>
