@@ -21,6 +21,7 @@ class App extends React.Component {
         this.state = {
             activeStory: 'map'
         };
+
         this.onStoryChange = this.onStoryChange.bind(this);
         // Sends event to client
         bridge.send('VKWebAppGetUserInfo')
@@ -32,7 +33,6 @@ class App extends React.Component {
             .catch(error => {
                 console.log(error);
             })
-
 
         // Subscribes to event, sended by client
         bridge.subscribe(e => console.log(e));
