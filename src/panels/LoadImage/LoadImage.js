@@ -3,13 +3,15 @@ import {View, Panel, PanelHeader, FormLayout, File, Div, Group} from "@vkontakte
 
 import AddNewImage from './addNewImage'
 import classes from './LoadImage.module.css';
-import NewsElement from "./ListElement";
+import ExtendedView from "./ExtendedView";
 
 
 class LoadImage extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            id: 1,
+        };
         
     }
 
@@ -33,7 +35,7 @@ class LoadImage extends React.Component {
                         Моя история
                     </PanelHeader>
                     <Group className={`${classes.contentWrapper} ${classes.listElement}`}>
-                        <NewsElement />
+                        <ExtendedView id={this.props.id}/>
                         <AddNewImage />
                     </Group>
 

@@ -1,6 +1,6 @@
 import React from "react";
-import {CellButton, Root, Separator, View} from "@vkontakte/vkui";
-import classes from './ListElement.module.css';
+import {CellButton, Panel, Root, Separator, View} from "@vkontakte/vkui";
+import classes from './ExtendedView.module.css';
 
 class NewsElement extends React.Component {
     constructor(props) {
@@ -10,7 +10,7 @@ class NewsElement extends React.Component {
 
     render() {
         return (
-            <div className={classes.listElementWrapper}>
+            <div>
                 <img className={classes.image}
                      src='https://roadheroes.storage.yandexcloud.net/de3758ec9b1b4d6c2406674298923af7_origin.jpg'>
                 </img>
@@ -26,6 +26,7 @@ class NewsElement extends React.Component {
                     </span>
                 </div>
             </div>
+
         )
     }
 }
