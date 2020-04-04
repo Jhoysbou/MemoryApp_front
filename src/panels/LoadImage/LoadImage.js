@@ -1,14 +1,17 @@
 import React from "react";
-import { View, Panel, PanelHeader, FormLayout, File } from "@vkontakte/vkui";
+import {View, Panel, PanelHeader, FormLayout, File, Div, Group} from "@vkontakte/vkui";
 
 import Icon24Camera from '@vkontakte/icons/dist/24/camera';
-
+import AddNewImage from './addNewImage'
 import classes from './LoadImage.module.css';
+import NewsElement from "./ListElement";
+import NewsFeed from "../NewsFeed/NewsFeed";
 
 class LoadImage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {};
+        
     }
 
     onSelectFile = e => {
@@ -21,9 +24,6 @@ class LoadImage extends React.Component {
         }
     };
 
-    componentWillUnmount() {
-        console.log(this.state.image)
-    }
 
 
     render() {
@@ -31,14 +31,20 @@ class LoadImage extends React.Component {
             <View activePanel="panel">
                 <Panel id="panel">
                     <PanelHeader>
-                        Загрузить фото
+                        Моя история
                     </PanelHeader>
-                    <FormLayout>
-                        <File top="Загрузите ваше фото" before={<Icon24Camera />} size="xl" accept="image/*" onChange={this.onSelectFile}>
-                            Открыть галерею
-                        </File>
-                        <img className={classes.image} style={{ maxWidth: '100%' }} src={this.state.image}/>
-                    </FormLayout>
+                    <Group className={`${classes.contentWrapper} ${classes.listElement}`}>
+                        <NewsElement />
+                        <AddNewImage />
+                    </Group>
+
+
+                    {/*<FormLayout>*/}
+                    {/*    <File top="Загрузите ваше фото" before={<Icon24Camera />} size="xl" accept="image/*" onChange={this.onSelectFile}>*/}
+                    {/*        Открыть галерею*/}
+                    {/*    </File>*/}
+                    {/*    <img className={classes.image} style={{ maxWidth: '100%' }} src={this.state.image}/>*/}
+                    {/*</FormLayout>*/}
                 </Panel>
             </View>
         )

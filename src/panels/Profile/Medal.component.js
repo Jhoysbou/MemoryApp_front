@@ -13,6 +13,7 @@ class Medal extends React.Component {
         return (
             <Card size="s" mode="shadow">
                 <img
+                    alt="medal"
                     src={this.props.medalType}
                     height="144" width="144"/>
                 <div style={{width: 144, height: 15}}/>

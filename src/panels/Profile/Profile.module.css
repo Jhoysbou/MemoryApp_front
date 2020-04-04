@@ -3,6 +3,7 @@
     font-size: small;
 }
 
+
 .name, .level_counter {
     float: left;
 }
@@ -14,8 +15,8 @@
 }
 
 .card {
-    background: rgb(36,33,0);
-    background: linear-gradient(90deg, rgba(36,33,0,1) 0%, rgba(8,133,97,1) 27%, rgba(0,212,255,1) 69%);
+    background: rgb(36, 33, 0);
+    background: linear-gradient(90deg, rgba(36, 33, 0, 1) 0%, rgba(8, 133, 97, 1) 27%, rgba(0, 212, 255, 1) 69%);
 }
 
 .card div {
