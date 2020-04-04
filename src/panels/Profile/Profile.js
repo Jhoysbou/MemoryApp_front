@@ -14,7 +14,7 @@ import classes from './Profile.module.css';
 class Profile extends React.Component {
     constructor(props) {
         super(props);
-
+        console.log(props.user)
         this.state = {
             user: props.user,
             progress: 67,

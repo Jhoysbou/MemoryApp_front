@@ -7,7 +7,10 @@ class NewsElement extends React.Component {
         super(props);
         this.state = {
             hero_id: props.hero_id,
+            heroes: props.heroes
         }
+
+
     }
 
 

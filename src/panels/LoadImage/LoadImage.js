@@ -1,6 +1,6 @@
 import React from "react";
 import vkBridge from '@vkontakte/vk-bridge';
-import {View, Panel, PanelHeader, CellButton, ConfigProvider, PanelHeaderBack, Group} from "@vkontakte/vkui";
+import {View, Panel, PanelHeader, CellButton, PanelHeaderBack, ScreenSpinner} from "@vkontakte/vkui";
 
 import AddNewHeroComponent from './addNewHero.component'
 import classes from './LoadImage.module.css';
@@ -12,17 +12,22 @@ class LoadImage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            user_id: props.user,
             id: 1,
-            hero: {},
             activePanel: "feed",
             history: ['feed'],
+            loadingState: true
         };
 
+        fetch('https://a830c179.ngrok.io/api/v1/user/get_heroes/' + this.state.user_id)
+            .then(response => {
+                return response.json()
+            })
+            .then(data => {
+                this.setState({heroes: data, loadingState: false})
+            })
     }
 
-    componentDidMount() {
-        //     https://a830c179.ngrok.io/api/v1/hero/getlist/
-    }
 
     goBack = () => {
         console.log('goBack()')
@@ -34,12 +39,24 @@ class LoadImage extends React.Component {
         }
         console.log('setState()')
         this.setState({history, activePanel});
+    };
+
+
+    renderHeroes(heroes) {
+        return (
+            <>
+                {heroes.map(hero => <CellButton onClick={() => {
+                        this.setState({name_onExtendedView: `${hero.name + ' ' + hero.surname + ' ' + hero.father_name}`, activePanel: 'extended'})}}>
+                        <ListElement img="https://roadheroes.storage.yandexcloud.net/de3758ec9b1b4d6c2406674298923af7_origin.jpg"
+                        name={hero.name + ' ' + hero.surname + ' ' + hero.father_name}
+                        rank="ст. лейтенант"
+                        date={hero.bd + '–' + hero.dd}/>
+                        </CellButton>
+                    )}
+            </>
+        );
     }
 
-    openListElement = (hero_id, hero_name) => {
-
-
-    }
 
     onSelectFile = e => {
         if (e.target.files && e.target.files.length > 0) {
@@ -52,7 +69,7 @@ class LoadImage extends React.Component {
     };
 
 
-    render() {
+    render(callbackfn, thisArg) {
         return (
             <View
                 activePanel={this.state.activePanel}
@@ -64,28 +81,21 @@ class LoadImage extends React.Component {
                     <PanelHeader>
                         Моя история
                     </PanelHeader>
-                    <CellButton onClick={() => {
-                        this.setState({
-                            name_onExtendedView: "Тюкалов Поликарп Дорофеевич",
-                            hero_id: 1,
-                            activePanel: 'extended'
-                        })
-                    }}>
-                        <ListElement
-                            img="https://roadheroes.storage.yandexcloud.net/de3758ec9b1b4d6c2406674298923af7_origin.jpg"
-                            name="Тюкалов Поликарп Дорофеевич"
-                            rank="ст. лейтенант"
-                            date="08.03.1922 – 5.6.1985"
-                        />
-                    </CellButton>
-                    {/*<ExtendedView id={this.props.id}/>*/}
+                    {
+                        this.state.loadingState ?
+                            <ScreenSpinner/> :
+                                this.renderHeroes(this.state.heroes)
+                    }
+
                     <AddNewHeroComponent/>
                 </Panel>
                 <Panel id="extended">
                     <PanelHeader left={<PanelHeaderBack onClick={() => this.setState({activePanel: 'feed'})}/>}>
                         {this.state.name_onExtendedView}
                     </PanelHeader>
-                    <ExtendedView hero_id={this.state.hero_id}/>
+                    <ExtendedView
+                        hero_name={this.state.name_onExtendedView}
+                        heroes = {this.state.heroes}/>
                 </Panel>
 
                 {/*<FormLayout>*/}
