@@ -19,7 +19,7 @@ class App extends React.Component {
         super(props);
 
         this.state = {
-            activeStory: 'photoLoader'
+            activeStory: 'map'
         };
         this.onStoryChange = this.onStoryChange.bind(this);
         // Sends event to client

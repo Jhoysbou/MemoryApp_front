@@ -1,6 +1,6 @@
 import React from "react";
 import vkBridge from '@vkontakte/vk-bridge';
-import {View, Panel, PanelHeader, CellButton, ConfigProvider, PanelHeaderBack, Group} from "@vkontakte/vkui";
+import {View, Panel, PanelHeader, CellButton, PanelHeaderBack} from "@vkontakte/vkui";
 
 import AddNewHeroComponent from './addNewHero.component'
 import classes from './LoadImage.module.css';
@@ -13,7 +13,6 @@ class LoadImage extends React.Component {
         super(props);
         this.state = {
             id: 1,
-            hero: {},
             activePanel: "feed",
             history: ['feed'],
         };
@@ -21,7 +20,14 @@ class LoadImage extends React.Component {
     }
 
     componentDidMount() {
-        //     https://a830c179.ngrok.io/api/v1/hero/getlist/
+        const heroes = fetch('https://a830c179.ngrok.io/api/v1/hero/getlist/')
+            .then((response) => {
+                return response.json();
+            })
+            .then((data) => {
+                console.log(data)
+            })
+        this.setState({heroes: heroes})
     }
 
     goBack = () => {
@@ -34,12 +40,31 @@ class LoadImage extends React.Component {
         }
         console.log('setState()')
         this.setState({history, activePanel});
+    };
+
+
+    async renderHeroes(heroes) {
+        let heroes_tags = "";
+        for (let hero in heroes) {
+            let hero_name = hero.name +' '+ hero.surname + ' ' + hero.father_name
+            heroes_tags += `<CellButton onClick={() => {
+                        this.setState({
+                            name_onExtendedView: ${hero_name},
+                            activePanel: 'extended'
+                        })
+                    }}>
+                        <ListElement
+                            img="https://roadheroes.storage.yandexcloud.net/de3758ec9b1b4d6c2406674298923af7_origin.jpg"
+                            name=${hero_name}
+                            rank="ст. лейтенант"
+                            date=${hero.bd} – ${hero.dd}"
+                        />
+                    </CellButton>`;
+        }
+        return heroes_tags;
+
     }
 
-    openListElement = (hero_id, hero_name) => {
-
-
-    }
 
     onSelectFile = e => {
         if (e.target.files && e.target.files.length > 0) {
@@ -64,20 +89,7 @@ class LoadImage extends React.Component {
                     <PanelHeader>
                         Моя история
                     </PanelHeader>
-                    <CellButton onClick={() => {
-                        this.setState({
-                            name_onExtendedView: "Тюкалов Поликарп Дорофеевич",
-                            hero_id: 1,
-                            activePanel: 'extended'
-                        })
-                    }}>
-                        <ListElement
-                            img="https://roadheroes.storage.yandexcloud.net/de3758ec9b1b4d6c2406674298923af7_origin.jpg"
-                            name="Тюкалов Поликарп Дорофеевич"
-                            rank="ст. лейтенант"
-                            date="08.03.1922 – 5.6.1985"
-                        />
-                    </CellButton>
+                    {this.renderHeroes(this.state.heroes)}
                     {/*<ExtendedView id={this.props.id}/>*/}
                     <AddNewHeroComponent/>
                 </Panel>
