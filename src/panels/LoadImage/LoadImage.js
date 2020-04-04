@@ -12,13 +12,13 @@ class LoadImage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            user_id: props.user,
+            user_id: props.user.id,
             id: 1,
             activePanel: "feed",
             history: ['feed'],
             loadingState: true
         };
-
+        console.log(this.state.user_id)
         fetch('https://a830c179.ngrok.io/api/v1/user/get_heroes/' + this.state.user_id)
             .then(response => {
                 return response.json()
