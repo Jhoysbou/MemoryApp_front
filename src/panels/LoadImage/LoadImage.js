@@ -1,11 +1,10 @@
 import React from "react";
 import {View, Panel, PanelHeader, FormLayout, File, Div, Group} from "@vkontakte/vkui";
 
-import Icon24Camera from '@vkontakte/icons/dist/24/camera';
 import AddNewImage from './addNewImage'
 import classes from './LoadImage.module.css';
 import NewsElement from "./ListElement";
-import NewsFeed from "../NewsFeed/NewsFeed";
+
 
 class LoadImage extends React.Component {
     constructor(props) {
