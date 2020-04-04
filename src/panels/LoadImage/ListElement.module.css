@@ -1,0 +1,21 @@
+.elementWrapper {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    grid-template-rows: 150px;
+    grid-gap: 10px;
+    margin: 10px;
+}
+
+.image {
+    border-radius: 8px;
+    width: 100%;
+}
+
+.elementWrapper {
+    text-align: left;
+}
+
+.tip {
+    font-family: Tahoma sans-serif;
+    color: rgba(0, 0, 0, 0.3)
+}

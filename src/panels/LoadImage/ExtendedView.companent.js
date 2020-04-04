@@ -1,10 +1,13 @@
 import React from "react";
-import {CellButton, Panel, Root, Separator, View} from "@vkontakte/vkui";
+import { Separator } from "@vkontakte/vkui";
 import classes from './ExtendedView.module.css';
 
 class NewsElement extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            hero_id: props.hero_id,
+        }
     }
 
 
@@ -20,7 +23,6 @@ class NewsElement extends React.Component {
                     </span>
                     <Separator className={classes.separator}/>
                     <span className={classes.shortStory}>
-
                        "Красного Знамени", "Отечественная война 2 ст.", междали: "За отвагу",
                         "За боевые заслуги"
                     </span>
