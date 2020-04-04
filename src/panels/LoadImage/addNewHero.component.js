@@ -1,6 +1,6 @@
 import React from "react";
 import classes from './LoadImage.module.css'
-import { Separator } from "@vkontakte/vkui";
+import {CellButton} from "@vkontakte/vkui";
 
 
 class AddNewHeroComponent extends React.Component {
@@ -11,9 +11,15 @@ class AddNewHeroComponent extends React.Component {
     render() {
         return (
             <div className={classes.add_new}>
-                content
-                <Separator className={classes.separator} />
+                <CellButton onClick={() => {}}
+                            className={classes.btn}
+                            size="l"
+                            mode="secondary">
+
+                   <div>Добавить героя войны</div>
+                </CellButton>
             </div>
+
         )
     }
 }

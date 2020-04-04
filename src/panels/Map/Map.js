@@ -1,7 +1,5 @@
 import React from 'react'
 import { Map as LeafletMap, TileLayer, Marker, Popup } from 'react-leaflet';
-import {View, Panel, PanelHeader, FormLayout, File, Div, Group} from "@vkontakte/vkui";
-
 
 class Map extends React.Component {
 
@@ -19,8 +17,7 @@ class Map extends React.Component {
 		        dragging={true}
 		        animate={true}
 		        easeLinearity={0.35}
-		>      
-
+		>
 			<TileLayer
 				url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
 			/>

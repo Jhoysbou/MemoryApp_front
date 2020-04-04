@@ -1,3 +1,17 @@
+.add_new {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 75px;
+    margin: 10px;
+    background-color: rgba(0, 29, 61, 0.05);
+    border-radius: 15px;
+}
 
-
+.btn div{
+    margin: auto;
+    color: #3F8AE0;
+    font-size: 18px;
+    font-family: Tahoma;
+    font-weight: bolder;
+}
 

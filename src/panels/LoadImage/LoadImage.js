@@ -20,6 +20,10 @@ class LoadImage extends React.Component {
 
     }
 
+    componentDidMount() {
+        //     https://a830c179.ngrok.io/api/v1/hero/getlist/
+    }
+
     goBack = () => {
         console.log('goBack()')
         const history = this.state.history;
@@ -60,7 +64,13 @@ class LoadImage extends React.Component {
                     <PanelHeader>
                         Моя история
                     </PanelHeader>
-                    <CellButton onClick={() => {this.setState({name_onExtendedView: "Тюкалов Поликарп Дорофеевич", hero_id: 1, activePanel: 'extended'})}}>
+                    <CellButton onClick={() => {
+                        this.setState({
+                            name_onExtendedView: "Тюкалов Поликарп Дорофеевич",
+                            hero_id: 1,
+                            activePanel: 'extended'
+                        })
+                    }}>
                         <ListElement
                             img="https://roadheroes.storage.yandexcloud.net/de3758ec9b1b4d6c2406674298923af7_origin.jpg"
                             name="Тюкалов Поликарп Дорофеевич"
@@ -69,7 +79,7 @@ class LoadImage extends React.Component {
                         />
                     </CellButton>
                     {/*<ExtendedView id={this.props.id}/>*/}
-                    <AddNewHeroComponent />
+                    <AddNewHeroComponent/>
                 </Panel>
                 <Panel id="extended">
                     <PanelHeader left={<PanelHeaderBack onClick={() => this.setState({activePanel: 'feed'})}/>}>
@@ -84,7 +94,6 @@ class LoadImage extends React.Component {
                 {/*    </File>*/}
                 {/*    <img className={classes.image} style={{ maxWidth: '100%' }} src={this.state.image}/>*/}
                 {/*</FormLayout>*/}
-
             </View>
         )
     }
