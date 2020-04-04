@@ -13,6 +13,7 @@ class AddNewImage extends React.Component {
             <div className={classes.add_new}>
                 content
                 <Separator className={classes.separator} />
+
             </div>
         )
     }
