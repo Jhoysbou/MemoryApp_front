@@ -3,7 +3,7 @@ import classes from './LoadImage.module.css'
 import { Div, Separator } from "@vkontakte/vkui";
 
 
-class AddNewImage extends React.Component {
+class AddNewImageCompanent extends React.Component {
     constructor(props) {
         super(props);
     }
@@ -19,4 +19,4 @@ class AddNewImage extends React.Component {
     }
 }
 
-export default AddNewImage;
+export default AddNewImageCompanent;

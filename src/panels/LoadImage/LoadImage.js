@@ -1,9 +1,10 @@
 import React from "react";
 import {View, Panel, PanelHeader, FormLayout, File, Div, Group} from "@vkontakte/vkui";
 
-import AddNewImage from './addNewImage'
+import AddNewImageCompanent from './addNewImage.companent'
 import classes from './LoadImage.module.css';
-import ExtendedView from "./ExtendedView";
+import ExtendedView from "./ExtendedView.companent";
+import ListElement from "./ListElement.companent.js";
 
 
 class LoadImage extends React.Component {
@@ -35,8 +36,9 @@ class LoadImage extends React.Component {
                         Моя история
                     </PanelHeader>
                     <Group className={`${classes.contentWrapper} ${classes.listElement}`}>
+                        <ListElement />
                         <ExtendedView id={this.props.id}/>
-                        <AddNewImage />
+                        <AddNewImageCompanent />
                     </Group>
 
 
