@@ -1,11 +1,12 @@
 import React from 'react'
 
-import { Map as LeafletMap, TileLayer, Marker, Popup, Polyline } from 'react-leaflet';
+import {Map as LeafletMap, TileLayer, Marker, Popup, Polyline} from 'react-leaflet';
 import classes from "./Map.module.css";
-import { View, Panel, PanelHeader } from "@vkontakte/vkui";
+import {View, Panel, PanelHeader, Epic} from "@vkontakte/vkui";
 
 
-const data = {'point0': [{'dolgota': 33.82234642761094},
+const data = {
+    'point0': [{'dolgota': 33.82234642761094},
         {'shirota': 50.764116910908356},
         {'date_from': '1941-09-16'},
         {'te_to': '1941-09-16'}],
@@ -76,14 +77,15 @@ const data = {'point0': [{'dolgota': 33.82234642761094},
     'point17': [{'dolgota': 30.744125790467123},
         {'shirota': 49.19631047380354},
         {'date_from': '1944-02-21'},
-        {'date_to': '1944-02-26'}]};
+        {'date_to': '1944-02-26'}]
+};
 
 
-function getPolyline(path){
+function getPolyline(path) {
 
     var tmp_polyline = [];
 
-    for (var key in path){
+    for (var key in path) {
         var point = path[key];
         var y = point[0]['dolgota']
         var x = point[1]['shirota']
@@ -96,41 +98,56 @@ function getPolyline(path){
 var polyline = getPolyline(data);
 
 class Map extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            activePanel: "map",
+
+        }
+    }
 
     render() {
         return (
+            <View activePanel="map">
+                <Panel id="map">
+                    <PanelHeader>
+                        Путь к победе
+                    </PanelHeader>
+                    <div className={classes.mapContainer}>
+                        <LeafletMap
+                            center={[50, 10]}
+                            zoom={6}
+                            maxZoom={10}
+                            attributionControl={true}
+                            zoomControl={true}
+                            doubleClickZoom={true}
+                            scrollWheelZoom={true}
+                            dragging={true}
+                            animate={true}
+                            easeLinearity={0.35}
+                        >
+                            <View activePanel="map">
+                                <Panel
+                                    className={classes.mapContainer}
+                                    id="map">
+                                    panel
+                                    <TileLayer url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'/>
 
-                <LeafletMap
-                    className={classes.mapContainer}
-                    center={[50, 10]}
-                    zoom={6}
-                    maxZoom={10}
-                    attributionControl={true}
-                    zoomControl={true}
-                    doubleClickZoom={true}
-                    scrollWheelZoom={true}
-                    dragging={true}
-                    animate={true}
-                    easeLinearity={0.35}
-                >
-                    <View activePanel="map">
-                        <Panel id="map">
-                            panel
-                            <TileLayer url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'/>
+                                    <Marker position={[50, 10]}>
+                                        <Popup>
+                                        </Popup>
+                                    </Marker>
 
-                            <Marker position={[50, 10]}>
-                                <Popup>
-                                </Popup>
-                            </Marker>
-
-                            <Polyline color="red" positions={polyline} />
-                        </Panel>
-                    </View>
+                                    <Polyline color="red" positions={polyline}/>
+                                </Panel>
+                            </View>
 
 
+                        </LeafletMap>
+                    </div>
 
-                </LeafletMap>
-
+                </Panel>
+            </View>
 
 
         );

@@ -4,7 +4,7 @@ import '@vkontakte/vkui/dist/vkui.css';
 import bridge from '@vkontakte/vk-bridge';
 
 
-import {Epic, Tabbar, TabbarItem, Panel, PanelHeader, Header, Separator, Link, Counter} from "@vkontakte/vkui";
+import {Epic, Tabbar, TabbarItem, Panel, PanelHeader} from "@vkontakte/vkui";
 import Icon28NewsfeedOutline from '@vkontakte/icons/dist/28/newsfeed_outline';
 import Icon28PlaceOutline from '@vkontakte/icons/dist/28/place_outline';
 import Icon28Profile from '@vkontakte/icons/dist/28/profile';
@@ -77,14 +77,10 @@ class App extends React.Component {
             }>
 
                 <NewsFeed id="feed" activePanel="feed"/>
-                <View id="map" activePanel="map">
-                    <Panel id="map">
-                        <PanelHeader>
-                            Путь к победе
-                        </PanelHeader>
-                        <Map />
-                    </Panel>
-                </View>
+
+
+                        <Map id="map"/>
+
 
                 <LoadImage id="photoLoader" activePanel="photoLoader" user={this.state.user}/>
 
