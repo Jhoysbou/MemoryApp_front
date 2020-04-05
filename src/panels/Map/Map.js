@@ -2,13 +2,13 @@ import React from 'react'
 
 import { Map as LeafletMap, TileLayer, Marker, Popup, Polyline } from 'react-leaflet';
 import MapStyle from "./MapStyle.css";
-//import { View } from "@vkontakte/vkui";
+import { View, Panel, PanelHeader } from "@vkontakte/vkui";
 
 
 const data = {'point0': [{'dolgota': 33.82234642761094},
         {'shirota': 50.764116910908356},
         {'date_from': '1941-09-16'},
-        {'date_to': '1941-09-16'}],
+        {'te_to': '1941-09-16'}],
     'point1': [{'dolgota': 37.538826633030375},
         {'shirota': 56.30072335112357},
         {'date_from': '1941-11-28'},
@@ -99,6 +99,7 @@ class Map extends React.Component {
 
     render() {
         return (
+
             <LeafletMap
                 center={[50, 10]}
                 zoom={6}
@@ -111,19 +112,31 @@ class Map extends React.Component {
                 animate={true}
                 easeLinearity={0.35}
             >
+            	<View activePanel="map">
+            		<Panel id="map">
 
-                <TileLayer
-                    url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
-                />
+    					<TileLayer url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'/>
+    					
+    					<Marker position={[50, 10]}>
+                    		<Popup>
+                    		</Popup>
+                		</Marker>
 
-                <Marker position={[50, 10]}>
-                    <Popup>
-                        Popup for any custom information.
-                    </Popup>
-                </Marker>
+                		<Polyline color="red" positions={polyline} />
 
-                <Polyline color="red" positions={polyline} />
+                	</Panel>
+                </View>
+
+
             </LeafletMap>
+    				
+
+                
+
+                
+
+                
+            
         );
     }
 }
