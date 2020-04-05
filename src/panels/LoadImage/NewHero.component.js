@@ -1,11 +1,12 @@
 import React from "react";
 import {
     Panel, FormLayout, FormLayoutGroup, Input, Select, Radio, Textarea,
-    Link, Checkbox, Button
+    Link, Checkbox, Button, File, View, Separator
 } from "@vkontakte/vkui";
 
+import Icon24Camera from '@vkontakte/icons/dist/24/camera';
+import classes from "./NewHero.module.css"
 import SERVER_URL from "../../SERVER_URL";
-
 
 
 class NewHero extends React.Component {
@@ -14,13 +15,20 @@ class NewHero extends React.Component {
 
         this.state = {
             armyUnit: '',
+            src: null,
         };
 
         this.onChange = this.onChange.bind(this);
     }
 
+    onSubmit = () => {
+        console.log('name')
+    }
+
     uploadForm = (data) => {
-        fetch( SERVER_URL + '/api/v1/hero/create', {
+
+
+        fetch(SERVER_URL + '/api/v1/hero/create', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -41,47 +49,65 @@ class NewHero extends React.Component {
         this.setState({[name]: value});
     }
 
+    onImageUpload = (e) => {
+        if (e.target.files && e.target.files.length > 0) {
+            const reader = new FileReader();
+            reader.addEventListener('load', () =>
+                this.setState({src: reader.result})
+            );
+            reader.readAsDataURL(e.target.files[0]);
+        }
+
+    };
+
 
     render() {
         const armyUnit = this.state.armyUnit;
 
         return (
-            <Panel>
-                <FormLayout>
-                    <Input top="Имя"/>
-                    <Input top="Фамилия"/>
-                    <Input top="Отчество"/>
+                <div>
+                    <img className={classes.preview} src={this.state.src}/>
+                    {this.state.src === null ? '' :<Separator />}
+                    <FormLayout claccName={classes.form}>
+                        <File top="Загрузите ваше фото" before={<Icon24Camera/>} size="xl" accept="image/*"
+                              onChange={this.onImageUpload}>
+                            Открыть галерею
+                        </File>
 
-                    <Select top="Пол" placeholder="Выберите пол">
-                        <option value="m">Мужской</option>
-                        <option value="f">Женский</option>
-                    </Select>
+                        <Input required="true" type='text' top="Имя"/>
+                        <Input required="true" type='text' top="Фамилия"/>
+                        <Input required="true" type='text' top="Отчество"/>
 
-                    <Textarea top="О себе"/>
+                        <Select top="Пол" placeholder="Выберите пол">
+                            <option value="m">Мужской</option>
+                            <option value="f">Женский</option>
+                        </Select>
 
-                    <FormLayoutGroup top="Это ваш родственник?">
-                        <Radio name="type">Да</Radio>
-                        <Radio name="type">Нет</Radio>
-                    </FormLayoutGroup>
+                        <Textarea top="О себе"/>
 
-                    <Select
-                        placeholder="Военное подразделение"
-                        status={armyUnit ? 'valid' : 'error'}
-                        bottom={armyUnit ? '' : 'Пожалуйста, укажите военное подразделение'}
-                        onChange={this.onChange}
-                        value={armyUnit}
-                        name="armyUnit"
-                    >
-                        <option value="1-я гвардейская армия (I)">1-я гвардейская армия (I)</option>
-                        <option value="1-я гвардейская армия (II)">1-я гвардейская армия (II)</option>
-                        <option value="1-я гвардейская армия (III)">1-я гвардейская армия (III)</option>
-                    </Select>
+                        <FormLayoutGroup top="Это ваш родственник?">
+                            <Radio name="type">Да</Radio>
+                            <Radio name="type">Нет</Radio>
+                        </FormLayoutGroup>
+
+                        <Select
+                            placeholder="Военное подразделение"
+                            status={armyUnit ? 'valid' : 'error'}
+                            bottom={armyUnit ? '' : 'Пожалуйста, укажите военное подразделение'}
+                            onChange={this.onChange}
+                            value={armyUnit}
+                            name="armyUnit"
+                        >
+                            <option value="1-я гвардейская армия (I)">1-я гвардейская армия (I)</option>
+                            <option value="1-я гвардейская армия (II)">1-я гвардейская армия (II)</option>
+                            <option value="1-я гвардейская армия (III)">1-я гвардейская армия (III)</option>
+                        </Select>
 
 
-                    <Checkbox>Согласен со всем <Link>этим</Link></Checkbox>
-                    <Button size="xl">Создать профиль</Button>
-                </FormLayout>
-            </Panel>
+                        <Checkbox>Согласен со всем <Link>этим</Link></Checkbox>
+                        <Button size="xl" onClick={this.onSubmit}>Создать профиль</Button>
+                    </FormLayout>
+                </div>
         );
     }
 }

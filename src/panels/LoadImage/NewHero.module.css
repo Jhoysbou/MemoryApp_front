@@ -1,0 +1,10 @@
+.preview {
+    display: block;
+    width: 90%;
+    margin: 10px auto;
+    border-radius: 15px;
+}
+
+.from {
+    padding-top: 0px;
+}

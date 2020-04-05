@@ -17,7 +17,7 @@ class NewsElement extends React.Component {
 
         let getHero = '';
         for (let i = 0; i < this.state.hero.length; i++) {
-            if (this.state.hero[i].id == this.state.hero_name) {
+            if (this.state.hero[i].id === this.state.hero_name) {
                 getHero = this.state.hero[i];
                 break;
             }

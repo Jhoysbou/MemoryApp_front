@@ -1,6 +1,6 @@
 import React from "react";
 import vkBridge from '@vkontakte/vk-bridge';
-import {View, Panel, PanelHeader, CellButton, PanelHeaderBack, ScreenSpinner} from "@vkontakte/vkui";
+import {View, Panel, PanelHeader, CellButton, PanelHeaderBack, ScreenSpinner, ConfigProvider} from "@vkontakte/vkui";
 
 import AddNewHeroButtonComponent from './addNewHeroButton.component'
 import classes from './LoadImage.module.css';
@@ -19,11 +19,9 @@ class LoadImage extends React.Component {
             user_id: props.user.id,
             id: 1,
             activePanel: "feed",
-            history: ['feed'],
             isLoading: true,
             noAnswer: false
         };
-
 
 
         fetch(SERVER_URL + '/api/v1/user/get_heroes/' + this.state.user_id)
@@ -36,16 +34,6 @@ class LoadImage extends React.Component {
             .catch(() => this.setState({noAnswer: true}))
     }
 
-
-    goBack = () => {
-        const history = this.state.history;
-        history.pop();
-        const activePanel = history[history.length - 1];
-        if (activePanel === 'feed') {
-            vkBridge.send('VKWebAppDisableSwipeBack');
-        }
-        this.setState({history, activePanel});
-    };
 
     renderHeroes(heroes) {
         return (
@@ -67,65 +55,44 @@ class LoadImage extends React.Component {
         );
     }
 
-
-    onSelectFile = e => {
-        if (e.target.files && e.target.files.length > 0) {
-            const reader = new FileReader();
-            reader.addEventListener('load', () =>
-                this.setState({image: reader.result})
-            );
-            reader.readAsDataURL(e.target.files[0]);
-        }
-    };
-
-
     render() {
         return (
-            <View
-                activePanel={this.state.activePanel}
-                onSwipeBack={this.goBack}
-                history={this.state.history}
-            >
+            <ConfigProvider isWebView={true}>
+                <View activePanel={this.state.activePanel}>
 
-                <Panel id="feed" className={`${classes.contentWrapper} ${classes.listElement}`}>
-                    <PanelHeader>
-                        Моя история
-                    </PanelHeader>
-                    {
-                        this.state.isLoading ?
-                            <ScreenSpinner/> :
-                            this.renderHeroes(this.state.heroes)
-                    }
+                    <Panel id="feed" className={`${classes.contentWrapper} ${classes.listElement}`}>
+                        <PanelHeader>
+                            Моя история
+                        </PanelHeader>
+                        {
+                            this.state.isLoading ?
+                                <ScreenSpinner/> :
+                                this.renderHeroes(this.state.heroes)
+                        }
 
-                    <AddNewHeroButtonComponent
-                        onClick={() => !this.state.isLoading ? this.setState({activePanel: 'new_hero'}) : "do_nothing"}/>
-                </Panel>
-                <Panel id="extended">
-                    <PanelHeader
-                        left={<PanelHeaderBack
-                            onClick={() => !this.state.isLoading ? this.setState({activePanel: 'feed'}) : "do_nothing"}/>}>
-                        {this.state.name_onExtendedView}
-                    </PanelHeader>
-                    <ExtendedView
-                        hero_name={this.state.selectedIdHero}
-                        hero={this.state.heroes}/>
-                </Panel>
-                <Panel id="new_hero">
-                    <PanelHeader
-                        left={<PanelHeaderBack
-                            onClick={() => !this.state.isLoading ? this.setState({activePanel: 'feed'}) : "do_nothing"}/>}>
-                        Создать профиль
-                    </PanelHeader>
-                    <NewHero/>
-                </Panel>
-
-                {/*<FormLayout>*/}
-                {/*    <File top="Загрузите ваше фото" before={<Icon24Camera />} size="xl" accept="image/*" onChange={this.onSelectFile}>*/}
-                {/*        Открыть галерею*/}
-                {/*    </File>*/}
-                {/*    <img className={classes.image} style={{ maxWidth: '100%' }} src={this.state.image}/>*/}
-                {/*</FormLayout>*/}
-            </View>
+                        <AddNewHeroButtonComponent
+                            onClick={() => !this.state.isLoading ? this.setState({activePanel: 'new_hero'}) : "do_nothing"}/>
+                    </Panel>
+                    <Panel id="extended">
+                        <PanelHeader
+                            left={<PanelHeaderBack
+                                onClick={() => !this.state.isLoading ? this.setState({activePanel: 'feed', }) : "do_nothing"}/>}>
+                            {this.state.name_onExtendedView}
+                        </PanelHeader>
+                        <ExtendedView
+                            hero_name={this.state.selectedIdHero}
+                            hero={this.state.heroes}/>
+                    </Panel>
+                    <Panel id="new_hero">
+                        <PanelHeader
+                            left={<PanelHeaderBack
+                                onClick={() => !this.state.isLoading ? this.setState({activePanel: 'feed'}) : "do_nothing"}/>}>
+                            Создать профиль
+                        </PanelHeader>
+                        <NewHero />
+                    </Panel>
+                </View>
+            </ConfigProvider>
         )
     }
 }
