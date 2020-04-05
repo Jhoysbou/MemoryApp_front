@@ -1,19 +1,7 @@
 import React from "react";
-import { View, Panel, PanelHeader, Div, Button, Group, Header, 
-CardGrid, Card } from '@vkontakte/vkui';
+import { View, Panel, PanelHeader, Div, Button, Group, Header,
+    CardGrid, Card, Avatar, Cell } from '@vkontakte/vkui';
 import Icon24User from '@vkontakte/icons/dist/24/user';
-
-
-const itemStyle = {
-    flexShrink: 0,
-    width: 80,
-    height: 94,
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    fontSize: 12
-};
-
 
 
 class NewsFeed extends React.Component {
@@ -21,39 +9,46 @@ class NewsFeed extends React.Component {
         super(props);
         this.state = {
 
-        }
+        };
     }
+
 
     render() {
         return(
 
-        	<View activePanel="card">
-    <Panel id="card">
-      <PanelHeader>Новости</PanelHeader>
-      <Group separator="hide" header={<Header mode="secondary">Новость1</Header>}>
-        <CardGrid>
-          <Card size="l" mode="shadow">
-            <div style={{ height: 96 }} />
-          </Card>
-        </CardGrid>
-      </Group>
-      <Group separator="hide" header={<Header mode="secondary">Новость2</Header>}>
-        <CardGrid>
-          <Card size="l" mode="shadow">
-            <div style={{ height: 96 }} />
-          </Card>
-        </CardGrid>
-      </Group>
-      <Group separator="hide" header={<Header mode="secondary">Новость3</Header>}>
-        <CardGrid>
-          <Card size="l" mode="shadow">
-            <div style={{ height: 96 }} />
-          </Card>
-        </CardGrid>
-      </Group>
-    </Panel>
-  </View>
-		)
+            <View activePanel="card">
+                <Panel id="card">
+                    <PanelHeader>Новости</PanelHeader>
+                    <Group separator="hide" header={<Header mode="secondary">5 апреля</Header>}>
+                        <CardGrid>
+                            <Card size="l" mode="shadow">
+                                <div style={{ height: 96 }}>
+                                    <Cell before={<Avatar src="https://sun9-41.userapi.com/c834203/v834203066/15c78b/e_UFH1nypZ0.jpg" size={80}/>}description="Добавила фото">Вероника Малышева</Cell>
+                                </div>
+                            </Card>
+                        </CardGrid>
+                    </Group>
+                    <Group separator="hide" header={<Header mode="secondary">5 апреля</Header>}>
+                        <CardGrid>
+                            <Card size="l" mode="shadow">
+                                <div style={{ height: 96, paddingLeft: 4, paddingTop: 4 }}>
+                                    <Cell before={<Avatar src="https://sun9-55.userapi.com/c857424/v857424321/c3b34/iWMOQGFnCvE.jpg" size={80}/>}description="Добавил фото">Артём Бакута</Cell>
+                                </div>
+                            </Card>
+                        </CardGrid>
+                    </Group>
+                    <Group separator="hide" header={<Header mode="secondary">4 апреля</Header>}>
+                        <CardGrid>
+                            <Card size="l" mode="shadow">
+                                <div style={{ height: 96 }} >
+                                    <Cell before={<Avatar src="https://sun9-24.userapi.com/c846123/v846123564/4360/PDP370w3NcQ.jpg" size={80} />}description="Добавил 4 фото">Фёдор Кондратенко</Cell>
+                                </div>
+                            </Card>
+                        </CardGrid>
+                    </Group>
+                </Panel>
+            </View>
+        )
     }
 }
 
