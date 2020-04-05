@@ -47,11 +47,11 @@ class Profile extends React.Component {
                                         <Counter size="m" mode="primary">{this.state.level}</Counter>
                                     </div>
                                     {/*{`${this.state.user.city.id === 0 ? '' : this.state.user.city.title}`}*/}
-                                    <InfoRow className={classes.progressBar} header="Вашe звание">
+                                    <InfoRow className={classes.progressBar} header="Вашe звание: генерал">
                                         <Progress value={this.state.progress}/>
                                         <p>
                                             Загружайте больше фотографий и информации о героях войны, чтобы повысить ваш
-                                            уровень
+                                            уровень.
                                         </p>
                                     </InfoRow>
                                 </div>
