@@ -33,7 +33,7 @@ class App extends React.Component {
             })
             .catch(error => {
                 console.log(error);
-            })
+            });
 
         // Subscribes to event, sended by client
         bridge.subscribe(e => console.log(e));
@@ -75,12 +75,8 @@ class App extends React.Component {
                     ><Icon28Profile/></TabbarItem>
                 </Tabbar>
             }>
-
-                <NewsFeed id="feed" activePanel="feed"/>
-
+                <NewsFeed id="feed" activePanel="feed" user={this.state.user}/>
                 <Map id="map"/>
-
-
                 <LoadImage id="photoLoader" activePanel="photoLoader" user={this.state.user}/>
 
                 <Profile id="profile" activePanel="profile" user={this.state.user}>
