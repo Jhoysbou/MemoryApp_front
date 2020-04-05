@@ -113,7 +113,7 @@ class NewHero extends React.Component {
         return (
             <div>
                 <img className={classes.preview} src={this.state.src}/>
-                {this.state.src === null ? '' :<Separator />}
+                {this.state.src === null ? '' : <Separator/>}
                 <FormLayout claccName={classes.form}>
                     <File top="Загрузите ваше фото" before={<Icon24Camera/>} size="xl" accept="image/*"
                           onChange={this.onImageUpload}>
