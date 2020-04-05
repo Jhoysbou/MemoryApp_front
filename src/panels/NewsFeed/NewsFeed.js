@@ -1,5 +1,6 @@
 import React from "react";
-import { View, Panel, PanelHeader, Div, Button, Group } from '@vkontakte/vkui';
+import { View, Panel, PanelHeader, Div, Button, Group, Header, 
+CardGrid, Card } from '@vkontakte/vkui';
 import Icon24User from '@vkontakte/icons/dist/24/user';
 
 
@@ -13,6 +14,8 @@ const itemStyle = {
     fontSize: 12
 };
 
+
+
 class NewsFeed extends React.Component {
     constructor(props) {
         super(props);
@@ -24,18 +27,32 @@ class NewsFeed extends React.Component {
     render() {
         return(
 
-        	<View activePanel="div">
-				  <Panel id="div">
-				    <PanelHeader>Лента новостей</PanelHeader>
-				    <Group>
-				      <Div>
-				        <Button stretched mode="secondary" size="l">
-				          Новость
-				        </Button>
-				      </Div>
-				    </Group>
-				  </Panel>
-				</View>
+        	<View activePanel="card">
+    <Panel id="card">
+      <PanelHeader>Новости</PanelHeader>
+      <Group separator="hide" header={<Header mode="secondary">Новость1</Header>}>
+        <CardGrid>
+          <Card size="l" mode="shadow">
+            <div style={{ height: 96 }} />
+          </Card>
+        </CardGrid>
+      </Group>
+      <Group separator="hide" header={<Header mode="secondary">Новость2</Header>}>
+        <CardGrid>
+          <Card size="l" mode="shadow">
+            <div style={{ height: 96 }} />
+          </Card>
+        </CardGrid>
+      </Group>
+      <Group separator="hide" header={<Header mode="secondary">Новость3</Header>}>
+        <CardGrid>
+          <Card size="l" mode="shadow">
+            <div style={{ height: 96 }} />
+          </Card>
+        </CardGrid>
+      </Group>
+    </Panel>
+  </View>
 		)
     }
 }

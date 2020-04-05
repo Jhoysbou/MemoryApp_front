@@ -76,7 +76,6 @@ class App extends React.Component {
                 </Tabbar>
             }>
                 
-                
                 <NewsFeed id="feed" activePanel="feed"/>
 
 				<Map id="map" activePanel="map"/>
