@@ -19,3 +19,5 @@ package-lock.json
 
 ngrok
 src/react-app-env.d.ts
+
+*.orig
