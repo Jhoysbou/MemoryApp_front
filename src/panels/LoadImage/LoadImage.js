@@ -23,7 +23,6 @@ class LoadImage extends React.Component {
             noAnswer: false
         };
 
-
         fetch(SERVER_URL + '/api/v1/user/get_heroes/' + this.state.user_id)
             .then(response => {
                 return response.json()
@@ -51,6 +50,8 @@ class LoadImage extends React.Component {
                                      date={hero.bd + ' – ' + hero.dd}/>
                     </CellButton>
                 )}
+                <AddNewHeroButtonComponent
+                    onClick={() => !this.state.isLoading ? this.setState({activePanel: 'new_hero'}) : "do_nothing"}/>
             </>
         );
     }
@@ -66,17 +67,16 @@ class LoadImage extends React.Component {
                         </PanelHeader>
                         {
                             this.state.isLoading ?
-                                <ScreenSpinner/> :
+                                <ScreenSpinner className={classes.spinner}/> :
                                 this.renderHeroes(this.state.heroes)
                         }
 
-                        <AddNewHeroButtonComponent
-                            onClick={() => !this.state.isLoading ? this.setState({activePanel: 'new_hero'}) : "do_nothing"}/>
+
                     </Panel>
                     <Panel id="extended">
                         <PanelHeader
                             left={<PanelHeaderBack
-                                onClick={() => !this.state.isLoading ? this.setState({activePanel: 'feed', }) : "do_nothing"}/>}>
+                                onClick={() => !this.state.isLoading ? this.setState({activePanel: 'feed',}) : "do_nothing"}/>}>
                             {this.state.name_onExtendedView}
                         </PanelHeader>
                         <ExtendedView
@@ -89,7 +89,7 @@ class LoadImage extends React.Component {
                                 onClick={() => !this.state.isLoading ? this.setState({activePanel: 'feed'}) : "do_nothing"}/>}>
                             Создать профиль
                         </PanelHeader>
-                        <NewHero />
+                        <NewHero/>
                     </Panel>
                 </View>
             </ConfigProvider>
