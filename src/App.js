@@ -13,6 +13,7 @@ import Icon28PictureStackOutline from '@vkontakte/icons/dist/28/picture_stack_ou
 import LoadImage from "./panels/LoadImage/LoadImage.js";
 import Profile from "./panels/Profile/Profile.js";
 import Map from "./panels/Map/Map.js";
+import NewsFeed from "./panels/NewsFeed/NewsFeed.js"
 
 class App extends React.Component {
     constructor(props) {
@@ -74,12 +75,10 @@ class App extends React.Component {
                     ><Icon28Profile/></TabbarItem>
                 </Tabbar>
             }>
-                <View id="feed" activePanel="feed">
-                    <Panel id="feed">
-                        <PanelHeader>Новости</PanelHeader>
-                    </Panel>
-                </View>
                 
+                
+                <NewsFeed id="feed" activePanel="feed"/>
+
 				<Map id="map" activePanel="map"/>
 				
                 <LoadImage id="photoLoader" activePanel="photoLoader" user={this.state.user}/>
