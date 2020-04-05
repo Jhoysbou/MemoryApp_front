@@ -76,10 +76,10 @@ class Profile extends React.Component {
                                     {/*TODO make achievements*/}
                                     <Card className={`${classes.card} ${classes.textInBLocks}`} size="l" mode="shadow">
                                         <div style={{height: 96}}>
-                                            50 фото
+                                            6 профилей
                                         </div>
                                     </Card>
-                                    <Card className={`${classes.card1} ${classes.textInBLocks}`} size="m" mode="shadow">
+                                    <Card className={`${classes.card5} ${classes.textInBLocks}`} size="m" mode="shadow">
                                         <div style={{height: 96}}>
                                             14 страниц
                                         </div>
@@ -89,13 +89,16 @@ class Profile extends React.Component {
                                             3 друга
                                         </div>
                                     </Card>
-                                    <Card className={`${classes.card3} ${classes.textInBLocks}`} size="s" mode="shadow">
+                                    <Card className={`${classes.card6} ${classes.textInBLocks}`} size="s" mode="shadow">
                                         <div style={{height: 96}}>
                                             50 фото
                                         </div>
                                     </Card>
                                     <Card className={`${classes.card4} ${classes.textInBLocks}`} size="s" mode="shadow">
-                                        <div style={{height: 96}}/>
+                                        <div style={{height: 96}}>
+                                            4 медали
+                                        </div>
+
                                     </Card>
                                     <Card className={`${classes.card5} ${classes.textInBLocks}`} size="s" mode="shadow">
                                         <div style={{height: 96}}>
