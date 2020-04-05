@@ -113,8 +113,10 @@ class Map extends React.Component {
                     <PanelHeader>
                         Путь к победе
                     </PanelHeader>
-                    <div className={classes.mapContainer}>
+                    <div
+                        className={classes.mapContainer}>
                         <LeafletMap
+
                             center={[50, 10]}
                             zoom={6}
                             maxZoom={10}
@@ -127,10 +129,8 @@ class Map extends React.Component {
                             easeLinearity={0.35}
                         >
                             <View activePanel="map">
-                                <Panel
-                                    className={classes.mapContainer}
+                                <Panel className={classes.mapContainer}
                                     id="map">
-                                    panel
                                     <TileLayer url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'/>
 
                                     <Marker position={[50, 10]}>

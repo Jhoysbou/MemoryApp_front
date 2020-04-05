@@ -78,8 +78,7 @@ class App extends React.Component {
 
                 <NewsFeed id="feed" activePanel="feed"/>
 
-
-                        <Map id="map"/>
+                <Map id="map"/>
 
 
                 <LoadImage id="photoLoader" activePanel="photoLoader" user={this.state.user}/>
