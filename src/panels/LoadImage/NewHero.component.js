@@ -14,21 +14,43 @@ class NewHero extends React.Component {
         super(props);
 
         this.state = {
-            armyUnit: '',
+            army_name: '',
             src: null,
+            name: '',
+            surname: '',
+            father_name: '',
+            info: '',
+            member: '4'
         };
 
         this.onChange = this.onChange.bind(this);
     }
 
     onSubmit = () => {
-        console.log('name')
-    }
+        // var query = {
+        //     "name": "d",
+        //     "surname": "sdf",
+        //     "father_name": "243fsdfs",
+        //     "info": "234",
+        //     "army_name": "124 гв. бап",
+        //     "army_name_short": "124 гв. ба",
+        //     "bd": "1111-11-11",
+        //     "dd": "2323-03-23",
+        //     "path": "{'point0': [{'dolgota': 24.39050836965737}, {'shirota': 55.503760156160666}, {'date_from': '1944-08-28'}, {'date_to': '1944-08-28'}]}",
+        //     "photos": [],
+        //     "avatar": [],
+        //     "member": 1
+        // }
+        // console.log('name')
+        // console.log(JSON.stringify(query))
+        this.uploadForm(this.state)
+    };
 
     uploadForm = (data) => {
-        fetch(SERVER_URL + '/api/v1/hero/create', {
+        fetch(SERVER_URL + '/api/v1/hero/create/', {
             method: 'POST',
             headers: {
+                'Accept': 'application/json',
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(data),
@@ -60,7 +82,11 @@ class NewHero extends React.Component {
 
 
     render() {
-        const armyUnit = this.state.armyUnit;
+        const army_name = this.state.army_name;
+        const name = this.state.name;
+        const surname = this.state.surname;
+        const father_name = this.state.father_name;
+        const info = this.state.info;
 
         return (
                 <div>
@@ -72,16 +98,46 @@ class NewHero extends React.Component {
                             Открыть галерею
                         </File>
 
-                        <Input required="true" type='text' top="Имя"/>
-                        <Input required="true" type='text' top="Фамилия"/>
-                        <Input required="true" type='text' top="Отчество"/>
+                        <Input 
+                            name="name" 
+                            required="true" 
+                            type='text' 
+                            top="Имя"
+                            onChange={this.onChange}
+                            value={name}
+                            name="name"
+                        />
+                        <Input 
+                            name="surname" 
+                            required="true" 
+                            type='text' 
+                            top="Фамилия"
+                            onChange={this.onChange}
+                            value={surname}
+                            name="surname"
+                        />
+                        <Input 
+                            name="father_name" 
+                            required="true"
+                            type='text'
+                            top="Отчество"
+                            onChange={this.onChange}
+                            value={father_name}
+                            name="father_name"
+                        />
 
                         <Select top="Пол" placeholder="Выберите пол">
                             <option value="m">Мужской</option>
                             <option value="f">Женский</option>
                         </Select>
 
-                        <Textarea top="О себе"/>
+                        <Textarea 
+                            name="info" 
+                            top="О себе"
+                            onChange={this.onChange}
+                            value={info}
+                            name="info"
+                        />
 
                         <FormLayoutGroup top="Это ваш родственник?">
                             <Radio name="type">Да</Radio>
@@ -90,11 +146,11 @@ class NewHero extends React.Component {
 
                         <Select
                             placeholder="Военное подразделение"
-                            status={armyUnit ? 'valid' : 'error'}
-                            bottom={armyUnit ? '' : 'Пожалуйста, укажите военное подразделение'}
+                            status={army_name ? 'valid' : 'error'}
+                            bottom={army_name ? '' : 'Пожалуйста, укажите военное подразделение'}
                             onChange={this.onChange}
-                            value={armyUnit}
-                            name="armyUnit"
+                            value={army_name}
+                            name="army_name"
                         >
                             <option value="1-я гвардейская армия (I)">1-я гвардейская армия (I)</option>
                             <option value="1-я гвардейская армия (II)">1-я гвардейская армия (II)</option>

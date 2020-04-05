@@ -19,32 +19,42 @@
 }
 
 .card {
-    background-color: #76bd23;
+    background-color: #3F8AE0;
     /* background-image: linear-gradient(to right, #c1c161 0%, #c1c161 0%, #d4d4b1 100%);*/
 }
 
 .card1 {
-    background-color: #a4d560;
+    background-color: aqua;
     /*background-image: linear-gradient(to right, #c1c161 0%, #c1c161 0%, #d4d4b1 100%);*/
 }
 
 .card2 {
-    background-color: #628c1c;
+    background-color: cadetblue;
 }
 
 .card3 {
-    background-color: #546224;
+    background-color: aquamarine;
 }
 
 .card4 {
-    background-color: #c0e18a;
+    background-color: dodgerblue;
 }
 
 .card5 {
-    background-color: #62a710;
+    background-color: deepskyblue;
 }
 
 .card6 {
-    background-color: #b7dd78;
+    background-color: powderblue;
+}
+
+.textInBLocks div {
+    color: white;
+    font-size: 18px;
+    font-family: Tahoma;
+    font-weight: bolder;
+    top: 35px;
+    text-align: center;
+
 }
 

@@ -56,7 +56,7 @@ class Profile extends React.Component {
                                     </InfoRow>
                                 </div>
                             </Cell>
-
+                            <img src={"https://media.giphy.com/media/ejDm9MuEUFoEdhFENp/giphy.gif"}/>
                         </Group>
                     </Group>
                     <Group header={<Header mode="secondary">Статистика</Header>}>
@@ -74,35 +74,35 @@ class Profile extends React.Component {
                             <Cell>
                                 <CardGrid>
                                     {/*TODO make achievements*/}
-                                    <Card className={classes.card} size="l" mode="shadow">
+                                    <Card className={`${classes.card} ${classes.textInBLocks}`} size="l" mode="shadow">
                                         <div style={{height: 96}}>
                                             50 фото
                                         </div>
                                     </Card>
-                                    <Card className={classes.card1} size="m" mode="shadow">
+                                    <Card className={`${classes.card1} ${classes.textInBLocks}`} size="m" mode="shadow">
                                         <div style={{height: 96}}>
                                             14 страниц
                                         </div>
                                     </Card>
-                                    <Card className={classes.card2} size="m" mode="shadow">
+                                    <Card className={`${classes.card2} ${classes.textInBLocks}`} size="m" mode="shadow">
                                         <div style={{height: 96}}>
                                             3 друга
                                         </div>
                                     </Card>
-                                    <Card className={classes.card3} size="s" mode="shadow">
+                                    <Card className={`${classes.card3} ${classes.textInBLocks}`} size="s" mode="shadow">
                                         <div style={{height: 96}}>
                                             50 фото
                                         </div>
                                     </Card>
-                                    <Card className={classes.card4} size="s" mode="shadow">
+                                    <Card className={`${classes.card4} ${classes.textInBLocks}`} size="s" mode="shadow">
                                         <div style={{height: 96}}/>
                                     </Card>
-                                    <Card className={classes.card5} size="s" mode="shadow">
+                                    <Card className={`${classes.card5} ${classes.textInBLocks}`} size="s" mode="shadow">
                                         <div style={{height: 96}}>
                                             7 историй
                                         </div>
                                     </Card>
-                                    <Card className={classes.card6} size="l" mode="shadow">
+                                    <Card className={`${classes.card6} ${classes.textInBLocks}`} size="l" mode="shadow">
                                         <div style={{height: 96}}>
                                             4 медали
                                         </div>
