@@ -16,7 +16,7 @@ class Medal extends React.Component {
                     alt="medal"
                     src={this.props.medalType}
                     height="144" width="144"/>
-                <div style={{width: 144, height: 15}}/>
+                <div />
             </Card>
         )
     }

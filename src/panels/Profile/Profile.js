@@ -56,7 +56,7 @@ class Profile extends React.Component {
                                     </InfoRow>
                                 </div>
                             </Cell>
-                            <img src={"https://media.giphy.com/media/ejDm9MuEUFoEdhFENp/giphy.gif"}/>
+                            <img className={classes.dog} src={"https://media.giphy.com/media/WU14E6y5alywgWhaeN/giphy.gif"}/>
                         </Group>
                     </Group>
                     <Group header={<Header mode="secondary">Статистика</Header>}>
