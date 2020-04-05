@@ -3,6 +3,10 @@
     font-size: small;
 }
 
+.header {
+    background: #3F8AE0;
+    width: 100%;
+}
 
 .name, .level_counter {
     float: left;
@@ -15,10 +19,32 @@
 }
 
 .card {
-    background: rgb(36, 33, 0);
-    background: linear-gradient(90deg, rgba(36, 33, 0, 1) 0%, rgba(8, 133, 97, 1) 27%, rgba(0, 212, 255, 1) 69%);
+    background-color: #76bd23;
+    /* background-image: linear-gradient(to right, #c1c161 0%, #c1c161 0%, #d4d4b1 100%);*/
 }
 
-.card div {
-    text-align: center;
+.card1 {
+    background-color: #a4d560;
+    /*background-image: linear-gradient(to right, #c1c161 0%, #c1c161 0%, #d4d4b1 100%);*/
 }
+
+.card2 {
+    background-color: #628c1c;
+}
+
+.card3 {
+    background-color: #546224;
+}
+
+.card4 {
+    background-color: #c0e18a;
+}
+
+.card5 {
+    background-color: #62a710;
+}
+
+.card6 {
+    background-color: #b7dd78;
+}
+

@@ -7,7 +7,7 @@ import {
 } from "@vkontakte/vkui";
 
 import Medal from './Medal.component.js';
-import { Medals } from './Medals.enum.ts'
+import {Medals} from './Medals.enum.ts'
 // style
 import classes from './Profile.module.css';
 
@@ -27,9 +27,9 @@ class Profile extends React.Component {
         return (
             <View activePanel="info-row">
                 <Panel id="info-row">
-                    <PanelHeader>
-                        Профиль
-                    </PanelHeader>
+                        <PanelHeader>
+                            Профиль
+                        </PanelHeader>
                     <Group>
                         <Group header={<Header mode="secondary">Информация о пользователе</Header>}>
                             <Cell
@@ -62,10 +62,10 @@ class Profile extends React.Component {
                             <Cell>
                                 <InfoRow header="Достижения">
                                     <CardScroll>
-                                        <Medal medalType={Medals.photo_10} />
-                                        <Medal medalType={Medals.photo_20} />
-                                        <Medal medalType={Medals.story_5} />
-                                        <Medal medalType={Medals.story_10} />
+                                        <Medal medalType={Medals.photo_10}/>
+                                        <Medal medalType={Medals.photo_20}/>
+                                        <Medal medalType={Medals.story_5}/>
+                                        <Medal medalType={Medals.story_10}/>
                                     </CardScroll>
                                 </InfoRow>
                             </Cell>
@@ -77,30 +77,30 @@ class Profile extends React.Component {
                                             50 фото
                                         </div>
                                     </Card>
-                                    <Card size="m" mode="shadow">
+                                    <Card className={classes.card1} size="m" mode="shadow">
                                         <div style={{height: 96}}>
                                             14 страниц
                                         </div>
                                     </Card>
-                                    <Card size="m" mode="shadow">
+                                    <Card className={classes.card2} size="m" mode="shadow">
                                         <div style={{height: 96}}>
                                             3 друга
                                         </div>
                                     </Card>
-                                    <Card size="s" mode="shadow">
+                                    <Card className={classes.card3} size="s" mode="shadow">
                                         <div style={{height: 96}}>
                                             50 фото
                                         </div>
                                     </Card>
-                                    <Card size="s" mode="shadow">
+                                    <Card className={classes.card4} size="s" mode="shadow">
                                         <div style={{height: 96}}/>
                                     </Card>
-                                    <Card size="s" mode="shadow">
+                                    <Card className={classes.card5} size="s" mode="shadow">
                                         <div style={{height: 96}}>
                                             7 историй
                                         </div>
                                     </Card>
-                                    <Card size="l" mode="shadow">
+                                    <Card className={classes.card6} size="l" mode="shadow">
                                         <div style={{height: 96}}>
                                             4 медали
                                         </div>

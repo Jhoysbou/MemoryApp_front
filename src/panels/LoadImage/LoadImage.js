@@ -17,16 +17,20 @@ class LoadImage extends React.Component {
             id: 1,
             activePanel: "feed",
             history: ['feed'],
-            isLoading: true
+            isLoading: true,
+            noAnswer: false
         };
 
-        fetch('https://a830c179.ngrok.io/api/v1/user/get_heroes/' + this.state.user_id)
+        this.SERVER_URL = "https://a830c179.ngrok.io";
+
+        fetch(this.SERVER_URL + '/api/v1/user/get_heroes/' + this.state.user_id)
             .then(response => {
                 return response.json()
             })
             .then(data => {
                 this.setState({heroes: data, isLoading: false})
             })
+            .catch(() => this.setState({noAnswer: true}))
     }
 
 
@@ -44,20 +48,25 @@ class LoadImage extends React.Component {
 
 
     renderHeroes(heroes) {
+        console.log();
+        console.log(heroes);
         return (
             <>
                 {heroes.map(hero => <CellButton onClick={() => {
-                        this.setState({name_onExtendedView: `${hero.name + ' ' + hero.surname + ' ' + hero.father_name}`, activePanel: 'extended'})}}>
-                        <ListElement img="https://roadheroes.storage.yandexcloud.net/de3758ec9b1b4d6c2406674298923af7_origin.jpg"
-                        name={hero.name + ' ' + hero.surname + ' ' + hero.father_name}
-                        rank="ст. лейтенант"
-                        date={hero.bd + '–' + hero.dd}/>
-                        </CellButton>
-                    )}
+                        this.setState({
+                            name_onExtendedView: `${hero.name + ' ' + hero.surname + ' ' + hero.father_name}`,
+                            activePanel: 'extended'
+                        })
+                    }}>
+                        <ListElement img={this.SERVER_URL + hero.avatar}
+                                     name={hero.name + ' ' + hero.surname + ' ' + hero.father_name}
+                                     rank="ст. лейтенант"
+                                     date={hero.bd + ' – ' + hero.dd}/>
+                    </CellButton>
+                )}
             </>
         );
     }
-
 
 
     onSelectFile = e => {
@@ -86,29 +95,29 @@ class LoadImage extends React.Component {
                     {
                         this.state.isLoading ?
                             <ScreenSpinner/> :
-                                this.renderHeroes(this.state.heroes)
+                            this.renderHeroes(this.state.heroes)
                     }
 
                     <AddNewHeroButtonComponent
-                        onClick={() => !this.state.isLoading ? this.setState({activePanel: 'new_hero'}): "do nothing"}/>
+                        onClick={() => !this.state.isLoading ? this.setState({activePanel: 'new_hero'}) : "do_nothing"}/>
                 </Panel>
                 <Panel id="extended">
                     <PanelHeader
                         left={<PanelHeaderBack
-                            onClick={() => !this.state.isLoading ? this.setState({activePanel: 'feed'}): "do nothing"}/>}>
+                            onClick={() => !this.state.isLoading ? this.setState({activePanel: 'feed'}) : "do_nothing"}/>}>
                         {this.state.name_onExtendedView}
                     </PanelHeader>
                     <ExtendedView
                         hero_name={this.state.name_onExtendedView}
-                        heroes = {this.state.heroes} />
+                        heroes={this.state.heroes}/>
                 </Panel>
                 <Panel id="new_hero">
                     <PanelHeader
                         left={<PanelHeaderBack
-                            onClick={() => !this.state.isLoading ? this.setState({activePanel: 'feed'}): "do nothing"}/>}>
+                            onClick={() => !this.state.isLoading ? this.setState({activePanel: 'feed'}) : "do_nothing"}/>}>
                         Создать профиль
                     </PanelHeader>
-                    <NewHero />
+                    <NewHero/>
                 </Panel>
 
 
