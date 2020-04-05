@@ -64,7 +64,7 @@ class Profile extends React.Component {
                             <Cell>
                                 <InfoRow header="Достижения">
                                     <CardScroll>
-                                        <Medal medalType={SERVER_URL + Medals.photo_10}/>
+                                        <Medal medalType={SERVER_URL + Medals.story_15}/>
                                         <Medal medalType={SERVER_URL + Medals.photo_20}/>
                                         <Medal medalType={SERVER_URL + Medals.story_5}/>
                                         <Medal medalType={SERVER_URL + Medals.story_10}/>
