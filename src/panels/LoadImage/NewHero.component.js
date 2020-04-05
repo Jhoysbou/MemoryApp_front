@@ -1,39 +1,49 @@
 import React from "react";
 import {
-    View, Panel, PanelHeader, FormLayout, FormLayoutGroup, Input, Select, Radio, Textarea,
+    Panel, FormLayout, FormLayoutGroup, Input, Select, Radio, Textarea,
     Link, Checkbox, Button
 } from "@vkontakte/vkui";
 
-import ArmyUnitsEnum from './ArmyUnits.enum.ts';
+import SERVER_URL from "../../SERVER_URL";
+
+
 
 class NewHero extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            email: '',
-            purpose: ''
-        }
+            armyUnit: '',
+        };
 
         this.onChange = this.onChange.bind(this);
     }
+
+    uploadForm = (data) => {
+        fetch( SERVER_URL + '/api/v1/hero/create', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log('Success:', data);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    };
 
     onChange(e) {
         const {name, value} = e.currentTarget;
         this.setState({[name]: value});
     }
 
-    renderArmies = () => {
-        return (
-            <>
-                {ArmyUnitsEnum.map(unit => <option value="0">Бизнес или работа</option>)}
-            </>
-        )
-
-    };
 
     render() {
-        const {email, purpose} = this.state;
+        const armyUnit = this.state.armyUnit;
 
         return (
             <Panel>
@@ -55,22 +65,21 @@ class NewHero extends React.Component {
                     </FormLayoutGroup>
 
                     <Select
-                        top="Военное подразделение"
-                        placeholder="Выберите цель поездки"
-                        status={purpose ? 'valid' : 'error'}
-                        bottom={purpose ? '' : 'Пожалуйста, укажите цель поездки'}
+                        placeholder="Военное подразделение"
+                        status={armyUnit ? 'valid' : 'error'}
+                        bottom={armyUnit ? '' : 'Пожалуйста, укажите военное подразделение'}
                         onChange={this.onChange}
-                        value={purpose}
-                        name="purpose"
+                        value={armyUnit}
+                        name="armyUnit"
                     >
-                        <option value="0">Бизнес или работа</option>
-                        <option value="1">Индивидуальный туризм</option>
-                        <option value="2">Посещение близких родственников</option>
+                        <option value="1-я гвардейская армия (I)">1-я гвардейская армия (I)</option>
+                        <option value="1-я гвардейская армия (II)">1-я гвардейская армия (II)</option>
+                        <option value="1-я гвардейская армия (III)">1-я гвардейская армия (III)</option>
                     </Select>
 
 
                     <Checkbox>Согласен со всем <Link>этим</Link></Checkbox>
-                    <Button size="xl">Зарегистрироваться</Button>
+                    <Button size="xl">Создать профиль</Button>
                 </FormLayout>
             </Panel>
         );

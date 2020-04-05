@@ -6,6 +6,8 @@ import {
     InfoRow, List, Cell, Avatar, Progress, Counter, CardScroll
 } from "@vkontakte/vkui";
 
+import SERVER_URL from "../../SERVER_URL";
+
 import Medal from './Medal.component.js';
 import {Medals} from './Medals.enum.ts'
 // style
@@ -62,10 +64,10 @@ class Profile extends React.Component {
                             <Cell>
                                 <InfoRow header="Достижения">
                                     <CardScroll>
-                                        <Medal medalType={Medals.photo_10}/>
-                                        <Medal medalType={Medals.photo_20}/>
-                                        <Medal medalType={Medals.story_5}/>
-                                        <Medal medalType={Medals.story_10}/>
+                                        <Medal medalType={SERVER_URL + Medals.photo_10}/>
+                                        <Medal medalType={SERVER_URL + Medals.photo_20}/>
+                                        <Medal medalType={SERVER_URL + Medals.story_5}/>
+                                        <Medal medalType={SERVER_URL + Medals.story_10}/>
                                     </CardScroll>
                                 </InfoRow>
                             </Cell>
