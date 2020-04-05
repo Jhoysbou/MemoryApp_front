@@ -26,8 +26,6 @@ class NewHero extends React.Component {
     }
 
     uploadForm = (data) => {
-
-
         fetch(SERVER_URL + '/api/v1/hero/create', {
             method: 'POST',
             headers: {
