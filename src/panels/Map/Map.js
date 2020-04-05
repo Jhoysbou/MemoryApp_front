@@ -1,8 +1,8 @@
 import React from 'react'
 
 import { Map as LeafletMap, TileLayer, Marker, Popup, Polyline } from 'react-leaflet';
-import './MapStyle.css';
-import { View } from "@vkontakte/vkui";
+import MapStyle from "./MapStyle.css";
+//import { View } from "@vkontakte/vkui";
 
 
 const data = {'point0': [{'dolgota': 33.82234642761094},

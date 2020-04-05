@@ -12,7 +12,7 @@ import Icon28PictureStackOutline from '@vkontakte/icons/dist/28/picture_stack_ou
 
 import LoadImage from "./panels/LoadImage/LoadImage.js";
 import Profile from "./panels/Profile/Profile.js";
-import Map from "./panels/Map/Map";
+import Map from "./panels/Map/Map.js";
 
 class App extends React.Component {
     constructor(props) {
