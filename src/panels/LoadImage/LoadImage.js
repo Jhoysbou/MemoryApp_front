@@ -47,7 +47,7 @@ class LoadImage extends React.Component {
                         <ListElement img={SERVER_URL + hero.avatar}
                                      name={hero.name + ' ' + hero.surname + ' ' + hero.father_name}
                                      rank="ст. лейтенант"
-                                     date={hero.bd + ' – ' + hero.dd}/>
+                                     date={hero.bd == null ? "" : hero.bd + ' – ' + hero.dd == null ? "" : hero.dd}/>
                     </CellButton>
                 )}
                 <AddNewHeroButtonComponent

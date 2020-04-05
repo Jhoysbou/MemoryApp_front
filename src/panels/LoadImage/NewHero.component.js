@@ -27,27 +27,49 @@ class NewHero extends React.Component {
     }
 
     onSubmit = () => {
-        // var query = {
-        //     "name": "d",
-        //     "surname": "sdf",
-        //     "father_name": "243fsdfs",
-        //     "info": "234",
-        //     "army_name": "124 гв. бап",
-        //     "army_name_short": "124 гв. ба",
-        //     "bd": "1111-11-11",
-        //     "dd": "2323-03-23",
-        //     "path": "{'point0': [{'dolgota': 24.39050836965737}, {'shirota': 55.503760156160666}, {'date_from': '1944-08-28'}, {'date_to': '1944-08-28'}]}",
-        //     "photos": [],
-        //     "avatar": [],
-        //     "member": 1
-        // }
-        // console.log('name')
-        // console.log(JSON.stringify(query))
         this.uploadForm(this.state)
-    };
+        var jsn = {};
+        var query = {
+            year: 1946,
+            isAvatar: true,
+            hero: ''
+        };
+
+        fetch(SERVER_URL + '/api/v1/get_last_heroes/0/1')
+            .then(response => response.json())
+            .then(result => {
+                    query.hero = result[0].id;
+                    console.log(query)
+                    this.uploadImage(query)
+                    this.setState();
+                },
+                // Примечание: важно обрабатывать ошибки именно здесь, а не в блоке catch(),
+                // чтобы не перехватывать исключения из ошибок в самих компонентах.
+                (error) => {
+                    console.log(error)
+                });
+    }
 
     uploadForm = (data) => {
         fetch(SERVER_URL + '/api/v1/hero/create/', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log('Success:', data);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    };
+
+    uploadImage = (data) => {
+        fetch(SERVER_URL + '/api/v1/photo/create/', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -89,79 +111,79 @@ class NewHero extends React.Component {
         const info = this.state.info;
 
         return (
-                <div>
-                    <img className={classes.preview} src={this.state.src}/>
-                    {this.state.src === null ? '' :<Separator />}
-                    <FormLayout claccName={classes.form}>
-                        <File top="Загрузите ваше фото" before={<Icon24Camera/>} size="xl" accept="image/*"
-                              onChange={this.onImageUpload}>
-                            Открыть галерею
-                        </File>
+            <div>
+                <img className={classes.preview} src={this.state.src}/>
+                {this.state.src === null ? '' :<Separator />}
+                <FormLayout claccName={classes.form}>
+                    <File top="Загрузите ваше фото" before={<Icon24Camera/>} size="xl" accept="image/*"
+                          onChange={this.onImageUpload}>
+                        Открыть галерею
+                    </File>
 
-                        <Input 
-                            name="name" 
-                            required="true" 
-                            type='text' 
-                            top="Имя"
-                            onChange={this.onChange}
-                            value={name}
-                            name="name"
-                        />
-                        <Input 
-                            name="surname" 
-                            required="true" 
-                            type='text' 
-                            top="Фамилия"
-                            onChange={this.onChange}
-                            value={surname}
-                            name="surname"
-                        />
-                        <Input 
-                            name="father_name" 
-                            required="true"
-                            type='text'
-                            top="Отчество"
-                            onChange={this.onChange}
-                            value={father_name}
-                            name="father_name"
-                        />
+                    <Input
+                        name="name"
+                        required="true"
+                        type='text'
+                        top="Имя"
+                        onChange={this.onChange}
+                        value={name}
+                        name="name"
+                    />
+                    <Input
+                        name="surname"
+                        required="true"
+                        type='text'
+                        top="Фамилия"
+                        onChange={this.onChange}
+                        value={surname}
+                        name="surname"
+                    />
+                    <Input
+                        name="father_name"
+                        required="true"
+                        type='text'
+                        top="Отчество"
+                        onChange={this.onChange}
+                        value={father_name}
+                        name="father_name"
+                    />
 
-                        <Select top="Пол" placeholder="Выберите пол">
-                            <option value="m">Мужской</option>
-                            <option value="f">Женский</option>
-                        </Select>
+                    <Select top="Пол" placeholder="Выберите пол">
+                        <option value="m">Мужской</option>
+                        <option value="f">Женский</option>
+                    </Select>
 
-                        <Textarea 
-                            name="info" 
-                            top="О себе"
-                            onChange={this.onChange}
-                            value={info}
-                            name="info"
-                        />
+                    <Textarea
+                        name="info"
+                        top="О себе"
+                        onChange={this.onChange}
+                        value={info}
+                        name="info"
+                    />
 
-                        <FormLayoutGroup top="Это ваш родственник?">
-                            <Radio name="type">Да</Radio>
-                            <Radio name="type">Нет</Radio>
-                        </FormLayoutGroup>
+                    <FormLayoutGroup top="Это ваш родственник?">
+                        <Radio name="type">Да</Radio>
+                        <Radio name="type">Нет</Radio>
+                    </FormLayoutGroup>
 
-                        <Select
-                            placeholder="Военное подразделение"
-                            status={army_name ? 'valid' : 'error'}
-                            bottom={army_name ? '' : 'Пожалуйста, укажите военное подразделение'}
-                            onChange={this.onChange}
-                            value={army_name}
-                            name="army_name"
-                        >
-                            <option value="1-я гвардейская армия (I)">1-я гвардейская армия (I)</option>
-                            <option value="1-я гвардейская армия (II)">1-я гвардейская армия (II)</option>
-                            <option value="1-я гвардейская армия (III)">1-я гвардейская армия (III)</option>
-                        </Select>
+                    <Select
+                        placeholder="Военное подразделение"
+                        status={army_name ? 'valid' : 'error'}
+                        bottom={army_name ? '' : 'Пожалуйста, укажите военное подразделение'}
+                        onChange={this.onChange}
+                        value={army_name}
+                        name="army_name"
+                    >
+                        <option value="1-я гвардейская армия (I)">1-я гвардейская армия (I)</option>
+                        <option value="1-я гвардейская армия (II)">1-я гвардейская армия (II)</option>
+                        <option value="1-я гвардейская армия (III)">1-я гвардейская армия (III)</option>
+                    </Select>
 
 
-                        <Checkbox>Согласен со всем <Link>этим</Link></Checkbox>
-                        <Button size="xl" onClick={this.onSubmit}>Создать профиль</Button>
-                    </FormLayout>
-                </div>
+                    <Checkbox>Согласен со всем <Link>этим</Link></Checkbox>
+                    <Button size="xl" onClick={this.onSubmit}>Создать профиль</Button>
+                </FormLayout>
+            </div>
         );
     }
 }
