@@ -75,12 +75,19 @@ class App extends React.Component {
                     ><Icon28Profile/></TabbarItem>
                 </Tabbar>
             }>
-                
-                
-                <NewsFeed id="feed" activePanel="feed"/>
 
-				<Map id="map" activePanel="map"/>
-				
+
+                <NewsFeed id="feed" activePanel="feed"/>
+                <View id="map" activePanel="map">
+                    <Panel id="map">
+                        <PanelHeader>
+                            Путь к победе
+                        </PanelHeader>
+                        <Map />
+                    </Panel>
+                </View>
+
+
                 <LoadImage id="photoLoader" activePanel="photoLoader" user={this.state.user}/>
 
                 <Profile id="profile" activePanel="profile" user={this.state.user}>

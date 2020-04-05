@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { Map as LeafletMap, TileLayer, Marker, Popup, Polyline } from 'react-leaflet';
-import MapStyle from "./MapStyle.css";
+import classes from "./Map.module.css";
 import { View, Panel, PanelHeader } from "@vkontakte/vkui";
 
 
@@ -100,43 +100,39 @@ class Map extends React.Component {
     render() {
         return (
 
-            <LeafletMap
-                center={[50, 10]}
-                zoom={6}
-                maxZoom={10}
-                attributionControl={true}
-                zoomControl={true}
-                doubleClickZoom={true}
-                scrollWheelZoom={true}
-                dragging={true}
-                animate={true}
-                easeLinearity={0.35}
-            >
-            	<View activePanel="map">
-            		<Panel id="map">
+                <LeafletMap
+                    className={classes.mapContainer}
+                    center={[50, 10]}
+                    zoom={6}
+                    maxZoom={10}
+                    attributionControl={true}
+                    zoomControl={true}
+                    doubleClickZoom={true}
+                    scrollWheelZoom={true}
+                    dragging={true}
+                    animate={true}
+                    easeLinearity={0.35}
+                >
+                    <View activePanel="map">
+                        <Panel id="map">
+                            panel
+                            <TileLayer url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'/>
 
-    					<TileLayer url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'/>
-    					
-    					<Marker position={[50, 10]}>
-                    		<Popup>
-                    		</Popup>
-                		</Marker>
+                            <Marker position={[50, 10]}>
+                                <Popup>
+                                </Popup>
+                            </Marker>
 
-                		<Polyline color="red" positions={polyline} />
-
-                	</Panel>
-                </View>
+                            <Polyline color="red" positions={polyline} />
+                        </Panel>
+                    </View>
 
 
-            </LeafletMap>
-    				
 
-                
+                </LeafletMap>
 
-                
 
-                
-            
+
         );
     }
 }
