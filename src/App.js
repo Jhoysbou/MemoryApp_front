@@ -76,7 +76,6 @@ class App extends React.Component {
                 </Tabbar>
             }>
 
-
                 <NewsFeed id="feed" activePanel="feed"/>
                 <View id="map" activePanel="map">
                     <Panel id="map">
@@ -86,7 +85,6 @@ class App extends React.Component {
                         <Map />
                     </Panel>
                 </View>
-
 
                 <LoadImage id="photoLoader" activePanel="photoLoader" user={this.state.user}/>
 
