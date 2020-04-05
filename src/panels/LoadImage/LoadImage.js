@@ -8,10 +8,13 @@ import ExtendedView from "./ExtendedView.component";
 import ListElement from "./ListElement.component.js";
 import NewHero from './NewHero.component';
 
+import SERVER_URL from "../../SERVER_URL";
+
 
 class LoadImage extends React.Component {
     constructor(props) {
         super(props);
+
         this.state = {
             user_id: props.user.id,
             id: 1,
@@ -21,9 +24,9 @@ class LoadImage extends React.Component {
             noAnswer: false
         };
 
-        this.SERVER_URL = "https://a830c179.ngrok.io";
 
-        fetch(this.SERVER_URL + '/api/v1/user/get_heroes/' + this.state.user_id)
+
+        fetch(SERVER_URL + '/api/v1/user/get_heroes/' + this.state.user_id)
             .then(response => {
                 return response.json()
             })
@@ -35,30 +38,26 @@ class LoadImage extends React.Component {
 
 
     goBack = () => {
-        console.log('goBack()')
         const history = this.state.history;
         history.pop();
         const activePanel = history[history.length - 1];
         if (activePanel === 'feed') {
             vkBridge.send('VKWebAppDisableSwipeBack');
         }
-        console.log('setState()')
         this.setState({history, activePanel});
     };
 
-
     renderHeroes(heroes) {
-        console.log();
-        console.log(heroes);
         return (
             <>
                 {heroes.map(hero => <CellButton onClick={() => {
                         this.setState({
                             name_onExtendedView: `${hero.name + ' ' + hero.surname + ' ' + hero.father_name}`,
+                            selectedIdHero: hero.id,
                             activePanel: 'extended'
                         })
                     }}>
-                        <ListElement img={this.SERVER_URL + hero.avatar}
+                        <ListElement img={SERVER_URL + hero.avatar}
                                      name={hero.name + ' ' + hero.surname + ' ' + hero.father_name}
                                      rank="ст. лейтенант"
                                      date={hero.bd + ' – ' + hero.dd}/>
@@ -108,8 +107,8 @@ class LoadImage extends React.Component {
                         {this.state.name_onExtendedView}
                     </PanelHeader>
                     <ExtendedView
-                        hero_name={this.state.name_onExtendedView}
-                        heroes={this.state.heroes}/>
+                        hero_name={this.state.selectedIdHero}
+                        hero={this.state.heroes}/>
                 </Panel>
                 <Panel id="new_hero">
                     <PanelHeader
@@ -119,7 +118,6 @@ class LoadImage extends React.Component {
                     </PanelHeader>
                     <NewHero/>
                 </Panel>
-
 
                 {/*<FormLayout>*/}
                 {/*    <File top="Загрузите ваше фото" before={<Icon24Camera />} size="xl" accept="image/*" onChange={this.onSelectFile}>*/}
