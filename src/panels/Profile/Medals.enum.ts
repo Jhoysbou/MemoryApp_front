@@ -1,4 +1,3 @@
-
 export enum Medals {
     // @ts-ignore
     photo_20 = `/media/2.png`,
